@@ -448,7 +448,7 @@
       
         <div class="fix-10-12 toCenter">
           <h1 class="ae-1">We Sell on Major Sites</h1>
-          <div class="ae-2"><p>List catalogs of products on <a href="http://rucept.net/"> over 30 </a> major global eCommerce marketplace for unparalleled and cost effective multichannel selling integrations</p></div>
+          <div class="ae-2"><p>List catalogs of products on <a href="https://rucept.net/"> over 30 </a> major global eCommerce marketplace for unparalleled and cost effective multichannel selling integrations</p></div>
         </div>
         <div class="fix-12-12">
           <!-- remove class tintLogos to disable color change of logo images -->
