@@ -35,7 +35,11 @@
     font-style: normal;
 }
 
-/* Apply Bauziet SITE-WIDE to all headings, nav links and buttons */
+/* Apply Bauziet SITE-WIDE to EVERYTHING to ensure 100% consistency */
+html,
+body,
+p,
+span,
 h1,
 h2,
 h3,
