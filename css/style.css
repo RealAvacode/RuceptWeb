@@ -1,21 +1,104 @@
 .dicoder-pircing #price-di-two {
-	background: #87ceeb;
+    background: #87ceeb;
 }
+
 .dicoder-pircing #price-di-two a {
-	background: blue !important;
+    background: blue !important;
 }
 
 .dicoder-pircing #price-di-three {
-	background: #ffdab9;
+    background: #ffdab9;
 }
+
 .dicoder-pircing #price-di-three a {
-	background: #FFA500 !important;
+    background: #FFA500 !important;
 }
 
 .dicoder-pircing #price-di-four {
-	background: #ffb6c1;
+    background: #ffb6c1;
 }
+
 .currency-85-dicoder {
-	margin-left: 0px !important;
-	
+    margin-left: 0px !important;
+
+}
+
+/* =============================================
+   RUCEPT CUSTOM OVERRIDES
+   ============================================= */
+
+/* Load Bauziet Font */
+@font-face {
+    font-family: 'Bauziet';
+    src: url('../assets/bauziet-font-family/Bauziet-Variable.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Apply Bauziet SITE-WIDE to all headings, nav links and buttons */
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+nav a,
+.sidebar a,
+.sidebar ul li a,
+.sidebar .subMenu li a,
+.navigation ul li a,
+.panel a,
+.button,
+button,
+input[type="submit"] {
+    font-family: 'Bauziet', sans-serif !important;
+}
+
+/* =============================================
+   LOGO — SIZE
+   ============================================= */
+/* Main nav bar logo */
+.panel.top .left img#chng {
+    width: 210px !important;
+    height: auto !important;
+    display: block !important;
+}
+
+/* Sidebar logo */
+nav.sidebar .content>a img,
+.sidebar .content>a img {
+    width: 210px !important;
+    height: auto !important;
+    display: block !important;
+}
+
+/* =============================================
+   LOGO — LEFT ALIGNMENT
+   ============================================= */
+/* Top panel: force flex-start */
+.panel.top .left {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    text-align: left !important;
+}
+
+/* Sidebar: the <a> wrapping the logo must be block & left-aligned.
+   Using nav.sidebar for higher specificity over `.sidebar a { display: inline-block }` */
+nav.sidebar .content>a,
+.sidebar .content>a {
+    display: block !important;
+    text-align: left !important;
+    margin: 0 0 20px 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+}
+
+/* Sidebar content container itself must also be left-aligned */
+nav.sidebar .content,
+.sidebar .content {
+    text-align: left !important;
 }
