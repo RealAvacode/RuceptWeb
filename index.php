@@ -250,6 +250,9 @@
         <li><a href="#">FAQs</a></li>
         <li><a href="#">Testimonials</a></li>
         <li><a href="#">Contact Us</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
+        <li><a href="/terms-of-service">Terms of Service</a></li>
+        
       </ul>
       <ul class="social">
         <li><a href="#"><svg>
