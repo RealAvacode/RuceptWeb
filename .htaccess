@@ -5,6 +5,7 @@
   # Clean URLs for legal pages
   RewriteRule ^privacy-policy/?$ privacy-policy.html [L]
   RewriteRule ^terms-of-service/?$ terms-of-service.html [L]
+  RewriteRule ^fabbrica/?$ fabbrica.html [L]
 </IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit
