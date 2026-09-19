@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Fabbrica Portal — Make it. Sell it. Create it together.</title>
-<meta name="description" content="The Fabbrica Portal: your manufacturing command center, a marketplace for finished products, and a co-creation engine where makers and streamers create together live. Industrial craft, made for the world.">
+<meta name="description" content="The Fabbrica Portal: your manufacturing command center, a marketplace for finished products, and a co-creation engine where makers and streamers create together live. Industrial craft, made for the world. Request an invite for the exclusive preview.">
 <style>
   :root{
     --wine:#5E1224; --wine-deep:#3F0A1A; --wine-soft:#7A2438;
@@ -41,31 +41,14 @@
   .btn.ghost{border:1px solid rgba(247,239,221,.55);color:var(--cream)}
   .btn.ghost:hover{background:rgba(247,239,221,.12)}
 
-  /* ---------- dashboard mock ---------- */
-  .dash{background:var(--card);border-radius:20px;box-shadow:0 30px 70px rgba(0,0,0,.35);overflow:hidden;color:var(--ink)}
-  .dash-bar{display:flex;align-items:center;gap:8px;padding:14px 20px;border-bottom:1px solid var(--fawn-deep);background:#fbf6ea}
-  .dot{width:11px;height:11px;border-radius:50%}
-  .dot.r{background:#d98a8a}.dot.y{background:var(--gold)}.dot.g{background:#8aa86b}
-  .dash-bar span{font-family:var(--sans);font-size:11px;letter-spacing:2px;color:var(--muted);margin-left:8px;text-transform:uppercase}
-  .dash-body{padding:26px}
-  .proj{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-  .proj h3{font-size:20px;font-weight:400;color:var(--wine)}
-  .pill{font-family:var(--sans);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:#eef3e6;color:#5c7a3a;border-radius:999px;padding:6px 14px}
-  .bar{height:9px;background:var(--fawn-deep);border-radius:99px;margin:14px 0 22px;overflow:hidden}
-  .bar i{display:block;height:100%;width:72%;background:linear-gradient(90deg,var(--wine),var(--gold));border-radius:99px}
-  .stages{display:flex;justify-content:space-between;margin-bottom:24px}
-  .stage{font-family:var(--sans);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:center;flex:1;position:relative}
-  .stage b{display:block;width:26px;height:26px;border-radius:50%;margin:0 auto 8px;line-height:26px;font-size:13px}
-  .stage.done b{background:var(--wine);color:#fff}
-  .stage.done{color:var(--wine)}
-  .stage.now b{background:#fff;border:2px solid var(--gold);color:var(--gold)}
-  .stage.now{color:var(--wine);font-weight:700}
-  .stage.todo b{background:#fff;border:2px solid var(--fawn-deep);color:var(--fawn-deep)}
-  .approval{border:1px dashed var(--gold);border-radius:14px;padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px;background:#fffdf4}
-  .approval p{font-family:var(--sans);font-size:13px;color:var(--muted);margin:0}
-  .approval p b{color:var(--wine);font-weight:600}
-  .approve{font-family:var(--sans);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;background:var(--wine);color:#fff;border-radius:999px;padding:11px 22px;white-space:nowrap;text-decoration:none}
-  .approve:hover{background:var(--wine-soft)}
+  .portalshot{width:100%;display:block;border-radius:20px;box-shadow:0 30px 70px rgba(0,0,0,.35);border:1px solid rgba(247,239,221,.25)}
+  .invitenote{font-family:var(--sans);font-size:12px;letter-spacing:1.5px;color:#EAD9BE;margin-top:18px;text-transform:uppercase}
+  .invitenote a{color:var(--gold-soft)}
+  .waitlist{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap}
+  .waitlist input{font-family:var(--sans);font-size:14px;padding:15px 24px;border-radius:999px;border:1px solid rgba(94,18,36,.35);background:#FFFDF7;color:var(--ink);min-width:280px;outline:none}
+  .waitlist button{font-family:var(--sans);font-size:13px;letter-spacing:2px;text-transform:uppercase;background:var(--wine);color:var(--cream);border:none;border-radius:999px;padding:15px 30px;cursor:pointer}
+  .waitlist button:hover{background:var(--wine-deep)}
+  .wl-note{font-family:var(--sans);font-size:13px;color:#5C3416;margin-top:14px;min-height:20px}
 
   /* ---------- sections ---------- */
   section.band{padding:72px 0}
@@ -133,7 +116,7 @@
       <nav class="topnav">
         <a href="#powers">The portal</a>
         <a href="#features">Features</a>
-        <a class="cta" href="mailto:mudit@rucept.com?subject=Fabbrica%20Portal%20access">Get access</a>
+        <a class="cta" href="mailto:mudit@rucept.com?subject=Invite%20request%3A%20Fabbrica%20Portal%20exclusive%20preview">Request invite</a>
       </nav>
     </div>
 
@@ -145,33 +128,13 @@
         <div class="tagline">Industrial craft, made for the world.</div>
         <p class="lede">The portal is your command center for manufacturing — milestones, samples, documents, and shipments in one dashboard. It's also a marketplace where finished products find their people, and a co-creation engine where makers and streamers dream up what's next, live and together.</p>
         <div class="btnrow">
-          <a class="btn solid" href="mailto:mudit@rucept.com?subject=Fabbrica%20Portal%20access">Request access</a>
+          <a class="btn solid" href="mailto:mudit@rucept.com?subject=Invite%20request%3A%20Fabbrica%20Portal%20exclusive%20preview">Request an invite</a>
           <a class="btn ghost" href="#powers">See how it works</a>
         </div>
+        <p class="invitenote">Invite-only preview — or <a href="#invite">join the waitlist</a> below.</p>
       </div>
 
-      <div class="dash" aria-hidden="true">
-        <div class="dash-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span>portal.fabbrica — overview</span></div>
-        <div class="dash-body">
-          <div class="proj">
-            <h3>Aurora Plush — Series 2</h3>
-            <span class="pill">In production</span>
-          </div>
-          <div class="bar"><i></i></div>
-          <div class="stages">
-            <div class="stage done"><b>✓</b>Brief</div>
-            <div class="stage done"><b>✓</b>Design</div>
-            <div class="stage done"><b>✓</b>Tooling</div>
-            <div class="stage now"><b>●</b>Production</div>
-            <div class="stage todo"><b>·</b>QC</div>
-            <div class="stage todo"><b>·</b>Ship</div>
-          </div>
-          <div class="approval">
-            <p><b>Sample approval needed.</b><br>Pre-production unit #3 is ready for your review.</p>
-            <a class="approve" href="#features">Review</a>
-          </div>
-        </div>
-      </div>
+      <img class="portalshot" src="https://iad.microlink.io/ZqbYwvKtSDz39csjgGP4mv8OSkMFKkUIu8-n7PX7rrL-uln3QX-SYs_v_W8b0pSvyMaCFBPNIlmgrQzuTVOmog.png" alt="The Dabble app — the Fabbrica portal in action">
     </div>
   </div>
 </div>
@@ -277,11 +240,16 @@
 <!-- CTA -->
 <div class="wrap">
   <div class="ctaband">
-    <div class="eyebrow">Get started</div>
-    <h2>Bring your next product to Fabbrica.</h2>
-    <p>Manufacturing muscle, a built-in marketplace, and live co-creation with makers and streamers. Industrial craft, made for the world — tell us what you're making, and we'll open your portal workspace personally.</p>
-    <a class="btn solid" href="mailto:mudit@rucept.com?subject=Fabbrica%20Portal%20access">Request portal access</a>
-    <div class="fine">Currently onboarding select brands, makers &amp; streamers · mudit@rucept.com</div>
+    <div class="eyebrow">Exclusive preview</div>
+    <h2>Get your invite.</h2>
+    <p>The Fabbrica Portal is opening to a small group of brands, makers, and streamers. Request an invite for an exclusive preview of the platform — or leave your email to join the waitlist.</p>
+    <a class="btn solid" href="mailto:mudit@rucept.com?subject=Invite%20request%3A%20Fabbrica%20Portal%20exclusive%20preview">Request an invite</a>
+    <form class="waitlist" id="invite" onsubmit="return joinWaitlist(event)">
+      <input type="email" id="wl-email" placeholder="you@example.com" required aria-label="Email address">
+      <button type="submit">Join the waitlist</button>
+    </form>
+    <p class="wl-note" id="wl-note"></p>
+    <div class="fine">Exclusive preview · currently onboarding select brands, makers &amp; streamers · mudit@rucept.com</div>
   </div>
 
   <footer>
@@ -293,6 +261,17 @@
     <p>Fabbrica · Industrial craft, made for the world</p>
   </footer>
 </div>
+
+<script>
+function joinWaitlist(e){
+  e.preventDefault();
+  var em=document.getElementById('wl-email').value.trim();
+  if(!em) return false;
+  window.location.href='mailto:mudit@rucept.com?subject='+encodeURIComponent('Fabbrica Portal waitlist')+'&body='+encodeURIComponent('Please add me to the Fabbrica Portal waitlist: '+em);
+  document.getElementById('wl-note').textContent='Thanks — your email app will open with the waitlist request ready to send.';
+  return false;
+}
+</script>
 
 </body>
 </html>
