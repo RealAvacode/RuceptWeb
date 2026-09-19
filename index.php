@@ -252,6 +252,7 @@
         <li><a href="#">Contact Us</a></li>
         <li><a href="/privacy-policy">Privacy Policy</a></li>
         <li><a href="/terms-of-service">Terms of Service</a></li>
+        <li><a href="/fabbrica">Fabbrica</a></li>
         
       </ul>
       <ul class="social">
