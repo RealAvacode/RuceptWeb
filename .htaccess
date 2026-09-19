@@ -2,6 +2,9 @@
   RewriteEngine On
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  # Clean URLs for legal pages
+  RewriteRule ^privacy-policy/?$ privacy-policy.html [L]
+  RewriteRule ^terms-of-service/?$ terms-of-service.html [L]
 </IfModule>
 
 # php -- BEGIN cPanel-generated handler, do not edit
