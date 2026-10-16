@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>Fabbrica — Request an invite</title>
+<meta name="description" content="Fabbrica is opening to a small group of artists, designers, brands and fabricators. Request your invitation." />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap');
+  :root{
+    color-scheme:light dark;
+    --stage:#2c0b17;--stage-2:#3a1025;--blood:#4A0B39;
+    --line:rgba(255,233,187,.28);--line-soft:rgba(255,255,255,.13);
+    --fawn:#FFF1DE;--muted:#D7BFC4;--gold:#E1BC65;--gold-2:#F5D995;--violet:#8A5CFF;--coral:#FF4B2E;
+    --shadow:0 28px 80px rgba(22,0,10,.42);--serif:'Italiana',Georgia,serif;--sans:'DM Sans','Helvetica Neue',sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;background:var(--stage);color:var(--fawn);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+  button,input{font:inherit}a{color:inherit}
+  .page{position:relative;isolation:isolate;overflow:hidden;flex:1;display:flex;flex-direction:column}
+  .aurora{position:absolute;z-index:-2;border-radius:50%;filter:blur(100px);opacity:.68;pointer-events:none}
+  .aurora.one{width:52vw;height:48vw;left:-22vw;top:-10vh;background:var(--violet)}
+  .aurora.two{width:46vw;height:46vw;right:-18vw;bottom:-16vh;background:var(--coral);opacity:.52}
+  .grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.18;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E")}
+  main{flex:1;display:grid;place-items:center;padding:56px 20px}
+  .panel{position:relative;overflow:hidden;width:min(620px,100%);padding:64px clamp(26px,6vw,64px) 54px;border-radius:10px;text-align:center;background:linear-gradient(145deg,rgba(255,255,255,.17),rgba(255,255,255,.035) 46%,rgba(118,22,73,.18));border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(22px) saturate(145%);box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.38)}
+  .panel:before{content:"";position:absolute;inset:auto -10% -60% 50%;height:320px;background:var(--coral);filter:blur(100px);opacity:.28;pointer-events:none}
+  .panel:after{content:"";position:absolute;inset:-60% 50% auto -10%;height:320px;background:var(--violet);filter:blur(100px);opacity:.35;pointer-events:none}
+  .panel>*{position:relative;z-index:1}
+  .wordmark{font-family:var(--serif);letter-spacing:.34em;font-size:19px;margin:0}
+  .lockup{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13.5px;margin-top:7px}
+  .eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600;margin:40px 0 14px}
+  .eyebrow:before,.eyebrow:after{content:"";width:34px;height:1px;background:currentColor}
+  h1{font:400 clamp(46px,9vw,68px)/.95 var(--serif);letter-spacing:-.03em;margin:0 0 20px}
+  .intro{max-width:470px;margin:0 auto 32px;color:var(--muted);font-size:16.5px}
+  form{display:flex;flex-direction:column;gap:10px;width:min(440px,100%);margin:0 auto;text-align:left}
+  label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  input{width:100%;min-height:52px;border:1px solid rgba(255,255,255,.26);background:rgba(17,3,10,.52);color:var(--fawn);border-radius:3px;padding:0 17px;outline:none}
+  input:focus{border-color:var(--gold)}
+  input::placeholder{color:#b99ba5}
+  .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;margin-top:8px;border:1px solid rgba(255,239,197,.55);background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.07));color:var(--fawn);padding:11px 20px;border-radius:3px;box-shadow:inset 0 1px rgba(255,255,255,.45),0 10px 28px rgba(0,0,0,.25);cursor:pointer;transition:background .2s,border-color .2s}
+  .button:hover{background:linear-gradient(180deg,rgba(225,188,101,.36),rgba(255,255,255,.09));border-color:var(--gold)}
+  .form-note{font-size:11px;margin:16px auto 0;color:#b99ba5;text-align:center}
+  .form-error{min-height:22px;margin-top:6px;color:#ffd3ca;font-size:12.5px;text-align:center}
+  .success{display:none;width:min(440px,100%);margin:0 auto;padding:22px;border:1px solid rgba(225,188,101,.5);border-radius:6px;background:rgba(17,3,10,.4)}
+  .success p{margin:0;font-family:var(--serif);font-size:19px}
+  footer{padding:30px 20px 38px;text-align:center}
+  .footer-mark{font-family:var(--serif);font-size:15px;letter-spacing:.34em}
+  .footer-tag{font-family:var(--serif);font-style:italic;color:var(--gold);margin-top:6px;font-size:13px}
+  footer a{color:var(--muted);font-size:12px;text-underline-offset:4px}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="aurora one"></div><div class="aurora two"></div><div class="grain"></div>
+  <main>
+    <div class="panel">
+      <p class="wordmark">FABBRICA</p>
+      <p class="lockup">Industrial Craft, made for the world.</p>
+      <div class="eyebrow">Exclusive preview</div>
+      <h1>Request your invite.</h1>
+      <p class="intro">Fabbrica is opening to a small group of artists, designers, brands and fabricators creating what comes next across entertainment and physical products.</p>
+      <form id="inviteForm" novalidate>
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="Your full name" required />
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="Your work email" required />
+        <button class="button" type="submit">Request an invite <span aria-hidden="true">→</span></button>
+        <p class="form-error" id="formError" role="alert"></p>
+        <p class="form-note">Invite-only preview. We will be in touch soon.</p>
+      </form>
+      <div class="success" id="inviteSuccess">
+        <p>You are on the list. We will be in touch soon.</p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="footer-mark">FABBRICA</div>
+    <div class="footer-tag">Craft Together</div>
+    <p style="margin:14px 0 0"><a href="https://fabbrica.rucept.com/">fabbrica.rucept.com</a></p>
+  </footer>
+</div>
+<script>
+  var form = document.getElementById('inviteForm');
+  var nameInput = document.getElementById('name');
+  var emailInput = document.getElementById('email');
+  var error = document.getElementById('formError');
+  var success = document.getElementById('inviteSuccess');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    error.textContent = '';
+    var name = nameInput.value.trim();
+    var email = emailInput.value.trim();
+    if (!name) { error.textContent = 'Please enter your name.'; return; }
+    if (!email || email.indexOf('@') < 1 || email.indexOf('.') < 0) { error.textContent = 'Please enter a valid email address.'; return; }
+    fetch('invite.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email)
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+      } else {
+        error.textContent = d.error || 'Something went wrong. Please try again.';
+      }
+    }).catch(function () {
+      error.textContent = 'Something went wrong. Please try again.';
+    });
+  });
+</script>
+</body>
+</html>
