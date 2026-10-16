@@ -7,13 +7,14 @@
 <title>Fabbrica — Get your invite</title>
 <meta name="description" content="Fabbrica, our product creation platform, is opening its alpha to a small group of artists, designers, brands and fabricators. Explore what comes next in the world of rare collectibles and industrial crafting." />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600&display=swap');
   :root{
     color-scheme:light dark;
     --stage:#2c0b17;--stage-2:#3a1025;--plum:#420A33;
-    --line:rgba(225,188,101,.45);
+    --line:rgba(225,188,101,.5);
     --white:#FFFFFF;--soft:#F2EBF0;--muted:#D8C3CC;--gold:#E1BC65;--gold-2:#F5D995;--violet:#8A5CFF;--coral:#FF4B2E;
-    --shadow:0 28px 80px rgba(22,0,10,.5);--serif:'Italiana',Georgia,serif;--sans:'DM Sans','Helvetica Neue',sans-serif;
+    --gold-metal:linear-gradient(100deg,#BF953F 0%,#FCF6BA 22%,#B38728 45%,#FBF5B7 68%,#AA771C 100%);
+    --shadow:0 28px 80px rgba(22,0,10,.5),0 0 54px rgba(225,188,101,.20);--serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat','Helvetica Neue',sans-serif;
   }
   *{box-sizing:border-box}
   body{margin:0;min-height:100vh;background:var(--stage);color:var(--white);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
@@ -28,25 +29,26 @@
   .panel:before{content:"";position:absolute;inset:auto -10% -60% 50%;height:320px;background:var(--coral);filter:blur(110px);opacity:.3;pointer-events:none}
   .panel:after{content:"";position:absolute;inset:-60% 50% auto -10%;height:320px;background:var(--violet);filter:blur(110px);opacity:.38;pointer-events:none}
   .panel>*{position:relative;z-index:1}
-  .eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600;margin:6px 0 18px}
-  .eyebrow:before,.eyebrow:after{content:"";width:34px;height:1px;background:currentColor}
-  h1{font:400 clamp(54px,10vw,86px)/.98 var(--serif);letter-spacing:-.02em;margin:0 0 22px;color:var(--white)}
-  .intro{max-width:520px;margin:0 auto 34px;color:var(--soft);font-size:16.5px}
+  .eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--gold-2);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600;margin:6px 0 18px}
+  .eyebrow:before,.eyebrow:after{content:"";width:34px;height:1px;background:linear-gradient(90deg,transparent,var(--gold-2),transparent)}
+  h1{font:500 clamp(58px,10.5vw,92px)/1 var(--serif);letter-spacing:-.01em;margin:0 0 22px;background:var(--gold-metal);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 7s ease-in-out infinite}
+  @keyframes sheen{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+  .intro{max-width:520px;margin:0 auto 34px;color:var(--soft);font-size:16px}
   form{display:flex;flex-direction:column;gap:10px;width:min(440px,100%);margin:0 auto;text-align:left}
-  label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-2)}
   input{width:100%;min-height:52px;border:1px solid rgba(255,255,255,.26);background:rgba(17,3,10,.52);color:var(--white);border-radius:3px;padding:0 17px;outline:none}
   input:focus{border-color:var(--gold)}
   input::placeholder{color:#b99ba5}
-  .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;margin-top:8px;border:1px solid rgba(245,217,149,.6);background:linear-gradient(180deg,#8a6a2f,#6d5322);color:var(--white);padding:11px 20px;border-radius:3px;box-shadow:0 10px 28px rgba(0,0,0,.3);cursor:pointer;transition:background .2s,border-color .2s}
-  .button:hover{background:linear-gradient(180deg,#a07c36,#7d6027);border-color:var(--gold-2)}
+  .button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;margin-top:8px;border:1px solid rgba(245,217,149,.7);background:var(--gold-metal);background-size:220% 100%;color:#2c0b17;font-weight:600;padding:11px 20px;border-radius:3px;box-shadow:0 10px 30px rgba(0,0,0,.32),0 0 26px rgba(225,188,101,.35);cursor:pointer;transition:background-position .5s,box-shadow .3s}
+  .button:hover{background-position:100% 50%;box-shadow:0 12px 34px rgba(0,0,0,.36),0 0 38px rgba(225,188,101,.55)}
   .form-note{font-size:11px;margin:16px auto 0;color:#b99ba5;text-align:center}
   .form-error{min-height:22px;margin-top:6px;color:#ffd3ca;font-size:12.5px;text-align:center}
   .success{display:none;width:min(440px,100%);margin:0 auto;padding:22px;border:1px solid rgba(225,188,101,.5);border-radius:6px;background:rgba(17,3,10,.4)}
-  .success p{margin:0;font-family:var(--serif);font-size:19px}
+  .success p{margin:0;font-family:var(--serif);font-size:21px}
   footer{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding:30px clamp(20px,5vw,54px) 38px}
-  .footer-mark{font-family:var(--serif);font-size:16px;letter-spacing:.34em;color:var(--white)}
-  .footer-tag{font-family:var(--serif);font-style:italic;color:var(--gold);margin-top:6px;font-size:13.5px}
-  .footer-right{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:13.5px;text-align:right}
+  .footer-mark{font-family:var(--serif);font-weight:600;font-size:18px;letter-spacing:.34em;color:var(--white)}
+  .footer-tag{font-family:var(--serif);font-style:italic;color:var(--gold-2);margin-top:6px;font-size:15px}
+  .footer-right{font-family:var(--serif);font-style:italic;color:var(--gold-2);font-size:15px;text-align:right}
 </style>
 </head>
 <body>
