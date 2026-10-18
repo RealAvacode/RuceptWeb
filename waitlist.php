@@ -13,6 +13,7 @@ function out($ok, $error = null) {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') out(false, 'Method not allowed.');
 
 $email = trim($_POST['email'] ?? '');
+$source = substr(preg_replace('/[^A-Za-z0-9\/_.-]/', '', trim($_POST['source'] ?? '')), 0, 120);
 if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 254) {
     out(false, 'Please enter a valid email address.');
 }
@@ -34,10 +35,11 @@ try {
         email TEXT NOT NULL UNIQUE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )");
+    $pdo->exec("ALTER TABLE fabbrica_waitlist ADD COLUMN IF NOT EXISTS source TEXT");
     $stmt = $pdo->prepare(
-        'INSERT INTO fabbrica_waitlist (email) VALUES (:email) ON CONFLICT (email) DO NOTHING'
+        'INSERT INTO fabbrica_waitlist (email, source) VALUES (:email, :source) ON CONFLICT (email) DO NOTHING'
     );
-    $stmt->execute([':email' => $email]);
+    $stmt->execute([':email' => $email, ':source' => $source !== '' ? $source : null]);
     out(true);
 } catch (Exception $e) {
     error_log('waitlist error: ' . $e->getMessage());

@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') out(false, 'Method not allowed.');
 
 $name = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
+$source = substr(preg_replace('/[^A-Za-z0-9\/_.-]/', '', trim($_POST['source'] ?? '')), 0, 120);
 if ($name === '' || strlen($name) > 120) {
     out(false, 'Please enter your name.');
 }
@@ -39,11 +40,12 @@ try {
         email TEXT NOT NULL UNIQUE,
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )");
+    $pdo->exec("ALTER TABLE fabbrica_invites ADD COLUMN IF NOT EXISTS source TEXT");
     $stmt = $pdo->prepare(
-        'INSERT INTO fabbrica_invites (name, email) VALUES (:name, :email)
-         ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name'
+        'INSERT INTO fabbrica_invites (name, email, source) VALUES (:name, :email, :source)
+         ON CONFLICT (email) DO UPDATE SET name = EXCLUDED.name, source = EXCLUDED.source'
     );
-    $stmt->execute([':name' => $name, ':email' => $email]);
+    $stmt->execute([':name' => $name, ':email' => $email, ':source' => $source !== '' ? $source : null]);
     out(true);
 } catch (Exception $e) {
     error_log('invite error: ' . $e->getMessage());
