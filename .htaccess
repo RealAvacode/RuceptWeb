@@ -10,6 +10,7 @@
   RewriteRule ^terms-of-service/?$ terms-of-service.html [L]
   RewriteRule ^fabbrica/?$ fabbrica.html [L]
   RewriteRule ^invite-mafia/?$ invite-mafia.html [L]
+  RewriteRule ^invite-mafia-2/?$ invite-mafia-2.html [L]
   RewriteRule ^invite/?$ /invite.html [L,R=301]
   # Serve Fabbrica page on fabbrica.rucept.com subdomain
   RewriteCond %{HTTP_HOST} ^fabbrica\.rucept\.com$ [NC]
