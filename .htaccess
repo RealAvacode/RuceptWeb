@@ -8,6 +8,9 @@
   # Apex + www: only the front page (root / index fall-through) moves to artefice.rucept.com; subpaths serve here as before
   RewriteCond %{HTTP_HOST} ^(www\.)?rucept\.com$ [NC]
   RewriteRule ^(index\.php)?$ https://artefice.rucept.com/ [L,R=301]
+  # The /fabbrica path retires on the serving hosts: send it to the artefice front page
+  RewriteCond %{HTTP_HOST} ^(artefice|artifice)\.rucept\.com$ [NC]
+  RewriteRule ^fabbrica/?$ https://artefice.rucept.com/ [L,R=301]
   # Clean URLs for legal pages
   RewriteRule ^privacy-policy/?$ privacy-policy.html [L]
   RewriteRule ^terms-of-service/?$ terms-of-service.html [L]
