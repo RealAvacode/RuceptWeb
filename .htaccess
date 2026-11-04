@@ -2,18 +2,18 @@
   RewriteEngine On
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-  # Redirect whole domain (apex + www) to Fabbrica subdomain
+  # Retired subdomain: fabbrica.rucept.com sends every path to the same path on artefice.rucept.com
+  RewriteCond %{HTTP_HOST} ^fabbrica\.rucept\.com$ [NC]
+  RewriteRule ^(.*)$ https://artefice.rucept.com/$1 [L,R=301]
+  # Apex + www: only the front page (root / index fall-through) moves to artefice.rucept.com; subpaths serve here as before
   RewriteCond %{HTTP_HOST} ^(www\.)?rucept\.com$ [NC]
-  RewriteRule ^(.*)$ https://fabbrica.rucept.com/$1 [L,R=301]
+  RewriteRule ^(index\.php)?$ https://artefice.rucept.com/ [L,R=301]
   # Clean URLs for legal pages
   RewriteRule ^privacy-policy/?$ privacy-policy.html [L]
   RewriteRule ^terms-of-service/?$ terms-of-service.html [L]
   RewriteRule ^fabbrica/?$ fabbrica.html [L]
   RewriteRule ^invite/?$ /invite.html [L,R=301]
-  # Serve Fabbrica page on fabbrica.rucept.com subdomain
-  RewriteCond %{HTTP_HOST} ^fabbrica\.rucept\.com$ [NC]
-  RewriteRule ^$ fabbrica.html [L]
-  # Serve the same page on artefice.rucept.com (canonical) and artifice.rucept.com (alias)
+  # Serve the Artefice landing page on artefice.rucept.com (canonical) and artifice.rucept.com (alias)
   RewriteCond %{HTTP_HOST} ^(artefice|artifice)\.rucept\.com$ [NC]
   RewriteRule ^$ fabbrica.html [L]
   # php -- BEGIN cPanel-generated handler, do not edit
