@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="dark" />
 <link rel="icon" href="data:," />
-<title>RATNĀ — 3D Stage · Shadow Study Nº 1</title>
+<title>RATNĀ — 3D Stage · Launch Line · Three Forms</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.onload=null;this.media='all'" />
@@ -113,6 +113,26 @@
     background:rgba(24,13,10,.6);padding:8px 11px;border-radius:4px;border:1px solid rgba(176,141,76,.12);
   }
   @media (max-width:560px){ .stage-ui .drag-hint{display:none;} }
+
+  /* Form tabs */
+  .form-tabs-wrap{margin-bottom:12px;}
+  .form-tabs{display:flex;gap:6px;flex-wrap:wrap;}
+  .form-tab{
+    flex:1 1 0;min-width:104px;appearance:none;cursor:pointer;
+    background:var(--panel-2);color:var(--muted);border:1px solid rgba(176,141,76,.22);border-radius:3px;
+    padding:10px 6px;font-family:"Jost",sans-serif;font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;line-height:1.25;
+  }
+  .form-tab small{display:block;font-size:9.5px;letter-spacing:.18em;color:var(--faint);margin-top:3px;text-transform:uppercase;}
+  .form-tab:hover{border-color:var(--gold-deep);color:var(--text);}
+  .form-tab.active{background:var(--panel);color:var(--gold-light);border-color:var(--gold-deep);}
+  .form-tab:focus-visible{outline:2px solid var(--gold-light);outline-offset:2px;}
+  .form-line{margin:9px 2px 0;font-family:"Marcellus",serif;font-size:15px;letter-spacing:.08em;color:var(--text);}
+  .form-line em{font-style:normal;color:var(--gold-light);}
+  .os-line{margin:5px 2px 0;font-size:12.5px;color:var(--muted);line-height:1.55;max-width:56ch;}
+  #fade-veil{position:absolute;inset:0;background:#17100d;opacity:0;pointer-events:none;transition:opacity .22s ease;z-index:5;}
+  #fade-veil.on{opacity:.92;}
+  .poster .poster-forms{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);line-height:1.9;}
+  .poster .poster-forms span{color:var(--faint);letter-spacing:.14em;text-transform:none;font-size:12px;}
 
   /* Act switcher (flat controls under the stage) */
   .act-switch{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
@@ -243,12 +263,22 @@
   <!-- ================= STAGE ================= -->
   <div class="stage-col">
     <div class="stage-sticky">
+      <div class="form-tabs-wrap">
+        <div class="form-tabs" role="tablist" aria-label="Ratnā launch line — choose a watch form">
+          <button type="button" class="form-tab active" role="tab" aria-selected="true" data-form="santos">Santos Pavé<small>Square · Pavé grid</small></button>
+          <button type="button" class="form-tab" role="tab" aria-selected="false" data-form="crash">Crash Squelette<small>Asymmetric · Skeleton</small></button>
+          <button type="button" class="form-tab" role="tab" aria-selected="false" data-form="offshore">Offshore Squelette<small>Octagon · Subdials</small></button>
+        </div>
+        <p class="form-line">One system. <em>Three forms.</em></p>
+        <p class="os-line">Ratnā OS moulds itself to the form. The data never changes. The expression is the watch's own.</p>
+      </div>
       <div class="stage-frame" id="stage-frame">
+        <div id="fade-veil"></div>
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
 
         <div class="poster" id="poster">
           <!-- Still-poster: the shadow silhouette, shown until WebGL is live (and kept if it fails) -->
-          <svg viewBox="0 0 300 460" role="img" aria-label="Silhouette of the Ratnā watch: a dark round case with crown and curved strap, a ring of unlit stones around the bezel">
+          <svg viewBox="0 0 300 460" role="img" aria-label="Silhouette of the Ratnā watch in its Santos Pavé form: a dark square case with crown and curved strap and a pavé field of unlit stones. The launch line also includes Crash Squelette and Offshore Squelette forms.">
             <defs>
               <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0" stop-color="#0c0705"/><stop offset=".55" stop-color="#17100c"/><stop offset="1" stop-color="#080504"/>
@@ -265,16 +295,17 @@
             </g>
             <ellipse cx="150" cy="428" rx="104" ry="10" fill="#000" opacity=".55"/>
           </svg>
+          <p class="poster-forms">Santos Pavé &nbsp;·&nbsp; Crash Squelette &nbsp;·&nbsp; Offshore Squelette<br><span>One system. Three forms. Form studies, not products for sale.</span></p>
           <p id="poster-status">The stage is being set</p>
           <p class="fallback-note" id="poster-note" hidden>This still is the shadow study itself: a first silhouette, not a finished watch. The live 3D stage needs WebGL, which this browser has not provided.</p>
         </div>
 
-        <canvas id="stage-canvas" aria-label="Interactive 3D stage: a dark watch silhouette on a plinth, ringed by stones that light in sequence. Drag to rotate."></canvas>
+        <canvas id="stage-canvas" aria-label="Interactive 3D stage: a dark jewel-encrusted watch silhouette on a plinth. Use the form tabs to switch between Santos Pavé, Crash Squelette and Offshore Squelette. Stones light in sequence as you scroll. Drag to rotate."></canvas>
 
         <div class="stage-ui">
           <div class="live-plate" aria-live="polite">
             <div class="lp-k">Now on stage</div>
-            <div class="lp-v" id="lp-title">Ratnā Nº 1 — Shadow Study</div>
+            <div class="lp-v" id="lp-title">Ratnā Nº 1 — Santos Pavé</div>
             <div class="lp-s"><span id="lp-act">Act 01 · Source</span> &nbsp;·&nbsp; Stones lit <span id="lp-gems">0 / 24</span></div>
           </div>
           <div class="drag-hint">Drag to rotate</div>
@@ -292,10 +323,10 @@
   <!-- ================= COPY ================= -->
   <div class="copy-col">
     <section class="hero">
-      <span class="shadow-tag">Shadow study · First silhouette · Not yet a product</span>
+      <span class="shadow-tag">Launch line · Three form studies · Not yet products</span>
       <h1 class="brand">RATNĀ</h1>
       <p class="subline">The bejeweled smartwatch.</p>
-      <p class="line">Jewels and craft from India. Engineering with Swiss craftsmen. An operating system of its own.</p>
+      <p class="line">Jewels and craft from India. Engineering with Swiss craftsmen. An operating system of its own, moulding itself to three treasured forms.</p>
       <div class="rule"></div>
       <p class="scroll-cue">Scroll — the stones are set act by act</p>
     </section>
@@ -304,7 +335,7 @@
       <p class="idx">01 — SOURCE</p>
       <h2>Stones from India</h2>
       <p>Every stone in the ring begins in India, cut and graded where Ratnā's craftsmen work. The watch on the plinth is still a shadow, but the ring around its bezel is real intent: <strong>twenty-four stones, sourced in Jaipur</strong>, waiting for light.</p>
-      <p>Watch the bezel as you scroll. A sweep of light travels the ring and the first stones begin to glint, one by one, in the order they would be chosen.</p>
+      <p>Watch the piece as you scroll, and switch forms with the tabs above the stage. A sweep of light travels each form in its own way, pavé row by row, along the skeleton bridges, or around the octagon, and the first stones begin to glint, one by one.</p>
       <div class="spec">
         <div><b>Stones</b> Sourced in India (Jaipur)</div>
         <div><b>Hands</b> Indian craftsmen</div>
@@ -326,23 +357,25 @@
       <p class="idx">03 — SPARK</p>
       <h2>The dial wakes</h2>
       <p>Under the dark dial sits a hidden display: jewels and a dark face when it rests, light when it is touched. In this final act the full ring is lit and <strong>Ratnā OS</strong>, a proprietary operating system of its own, wakes through the dial with the time and a quiet reading or two. Nothing shouts. It glows.</p>
+      <p><strong>Ratnā OS moulds itself to the form. The data never changes. The expression is the watch's own.</strong> Santos lays the same reading out in grid order, its power as a bottom row of stones. Crash carries it on its gears, the time calm on an undistorted centre plate, power wound into a mainspring barrel. Offshore fixes its eight bezel points as app positions and gives health, steps and reserve to three subdials, the reserve drawn as a power-reserve complication.</p>
       <div class="spec">
-        <div><b>System</b> Ratnā OS, proprietary</div>
-        <div><b>Dial</b> Hidden dead-front display</div>
+        <div><b>System</b> Ratnā OS, proprietary — same core data on every form</div>
+        <div><b>Dial</b> Hidden dead-front display, laid out per form</div>
       </div>
     </section>
 
     <section class="plate-wrap" id="plate">
       <div class="plate">
         <p class="p-k">Now on stage · Provenance plate</p>
-        <h3>Ratnā Nº 1</h3>
+        <h3 id="plate-title">Ratnā Nº 1 — Santos Pavé</h3>
         <dl>
-          <dt>Piece</dt><dd>Ratnā Nº 1, Shadow Study</dd>
-          <dt>Stones</dt><dd>Sourced in India (Jaipur)</dd>
-          <dt>Setting</dt><dd>Indian craftsmanship, Swiss engineering partnership</dd>
-          <dt>System</dt><dd>Ratnā OS, proprietary</dd>
+          <dt>Piece</dt><dd id="plate-piece">Ratnā Nº 1 Santos Pavé — Form study after the Santos</dd>
+          <dt>Form</dt><dd id="plate-form">Square, grid-true case with rounded corners; pavé field of stones; exposed bezel screws at the corners.</dd>
+          <dt>Stones</dt><dd id="plate-stones">Sourced in India (Jaipur) — 24 pavé points, lit row by row</dd>
+          <dt>Setting</dt><dd id="plate-setting">Pavé setting by Indian craftsmanship, Swiss engineering partnership</dd>
+          <dt>System</dt><dd>Ratnā OS, proprietary — same core data, expressed in grid order</dd>
         </dl>
-        <p class="p-foot">A first silhouette, shown as a shadow on purpose. No finished watch exists yet, and nothing on this stage is for sale.</p>
+        <p class="p-foot" id="plate-foot">A form study, shown as a shadow on purpose. Labelled honestly as a study after the Santos: no finished watch exists yet, and nothing on this stage is for sale.</p>
       </div>
     </section>
   </div>
@@ -377,7 +410,7 @@
 
 <footer>
   <span class="f-brand">RATNĀ</span>
-  <span>Shadow Study Nº 1 · ratna.rucept.com</span>
+  <span>Launch Line · Three Form Studies · ratna.rucept.com</span>
   <span>Jewels &amp; craft from India · Ratnā OS</span>
 </footer>
 
@@ -414,6 +447,72 @@
     b.addEventListener('click', function(){
       var el = document.getElementById(b.getAttribute('data-goto'));
       if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
+
+
+  /* ---------- Launch-line forms: tabs, plate, live plate ---------- */
+  var FORM_DATA = {
+    santos: {
+      name: 'Santos Pavé', short: 'SANTOS PAVÉ',
+      lpTitle: 'Ratnā Nº 1 — Santos Pavé',
+      plateTitle: 'Ratnā Nº 1 — Santos Pavé',
+      piece: 'Ratnā Nº 1 Santos Pavé — Form study after the Santos',
+      form: 'Square, grid-true case with rounded corners; pavé field of stones; exposed bezel screws at the corners; Roman-numeral hints in shadow.',
+      stones: 'Sourced in India (Jaipur) — 24 pavé points, lit row by row',
+      setting: 'Pavé setting by Indian craftsmanship, Swiss engineering partnership',
+      system: 'Ratnā OS, proprietary — same core data, expressed in grid order; power as the bottom row of stones',
+      foot: 'A form study, shown as a shadow on purpose. Labelled honestly as a study after the Santos: no finished watch exists yet, and nothing on this stage is for sale.'
+    },
+    crash: {
+      name: 'Crash Squelette', short: 'CRASH SQUELETTE',
+      lpTitle: 'Ratnā Nº 1 — Crash Squelette',
+      plateTitle: 'Ratnā Nº 1 — Crash Squelette',
+      piece: 'Ratnā Nº 1 Crash Squelette — Form study after the Crash',
+      form: 'Asymmetric melting case contour; openworked skeleton bridges and three gear silhouettes; the layout warps with the case, the time sits on a calm centre plate.',
+      stones: 'Sourced in India (Jaipur) — 24 points set along the skeleton bridges',
+      setting: 'Bridge setting by Indian craftsmanship, Swiss engineering partnership',
+      system: 'Ratnā OS, proprietary — same core data, carried on the gears; power as a mainspring barrel',
+      foot: 'A form study, shown as a shadow on purpose. Labelled honestly as a study after the Crash: no finished watch exists yet, and nothing on this stage is for sale.'
+    },
+    offshore: {
+      name: 'Offshore Squelette', short: 'OFFSHORE SQUELETTE',
+      lpTitle: 'Ratnā Nº 1 — Offshore Squelette',
+      plateTitle: 'Ratnā Nº 1 — Offshore Squelette',
+      piece: 'Ratnā Nº 1 Offshore Squelette — Form study after the Offshore',
+      form: 'Bold octagonal bezel with eight large fixed points; three subdial rings for health, activity and reserve; chunky crown and two pushers.',
+      stones: 'Sourced in India (Jaipur) — 24 points on the octagon ring, eight of them large',
+      setting: 'Octagon setting by Indian craftsmanship, Swiss engineering partnership',
+      system: 'Ratnā OS, proprietary — same core data; the eight bezel points are the fixed app positions, reserve as a power-reserve complication',
+      foot: 'A form study, shown as a shadow on purpose. Labelled honestly as a study after the Offshore: no finished watch exists yet, and nothing on this stage is for sale.'
+    }
+  };
+  var currentFormId = 'santos';
+  var formTabs = Array.prototype.slice.call(document.querySelectorAll('.form-tab'));
+  function applyFormDOM(id){
+    var d = FORM_DATA[id]; if(!d) return;
+    currentFormId = id;
+    formTabs.forEach(function(b){
+      var on = b.getAttribute('data-form') === id;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    var lpT = document.getElementById('lp-title'); if(lpT) lpT.textContent = d.lpTitle;
+    var set = function(eid, txt){ var el = document.getElementById(eid); if(el) el.textContent = txt; };
+    set('plate-title', d.plateTitle); set('plate-piece', d.piece); set('plate-form', d.form);
+    set('plate-stones', d.stones); set('plate-setting', d.setting); set('plate-foot', d.foot);
+    var sysDd = document.querySelector('#plate dl dd:last-of-type');
+    /* system row is the last dd whose dt is System: update via plate structure */
+    var dts = document.querySelectorAll('#plate dt');
+    for(var i=0;i<dts.length;i++){ if(dts[i].textContent.trim() === 'System' && dts[i].nextElementSibling) dts[i].nextElementSibling.textContent = d.system; }
+  }
+  formTabs.forEach(function(b){
+    b.addEventListener('click', function(){
+      var id = b.getAttribute('data-form');
+      if(id === currentFormId) return;
+      applyFormDOM(id);
+      if(window.__ratnaSwap) window.__ratnaSwap(id);
+      else { var lt = document.getElementById('lp-title'); /* poster fallback: plate already updated */ }
     });
   });
 
@@ -547,20 +646,24 @@
   pTrim.rotation.x = Math.PI/2; pTrim.position.y = -1.41;
   plinth.add(pBase, pShaft, pTop, pTrim);
 
-  /* Plaque texture: RATNĀ Nº 1 */
-  (function(){
-    var c = document.createElement('canvas'); c.width = 512; c.height = 128;
-    var g = c.getContext('2d');
+  /* Plaque texture: RATNĀ Nº 1 + current form */
+  var plaqueCanvas = document.createElement('canvas'); plaqueCanvas.width = 512; plaqueCanvas.height = 128;
+  var plaqueTex = new THREE.CanvasTexture(plaqueCanvas);
+  if(THREE.SRGBColorSpace !== undefined) plaqueTex.colorSpace = THREE.SRGBColorSpace;
+  function drawPlaque(short){
+    var g = plaqueCanvas.getContext('2d');
     g.fillStyle = '#1d1109'; g.fillRect(0,0,512,128);
     g.strokeStyle = '#a67c37'; g.lineWidth = 3; g.strokeRect(8,8,496,112);
     g.fillStyle = '#c0a062'; g.textAlign = 'center';
     g.font = '44px Georgia, serif'; g.fillText('R A T N Ā', 256, 58);
-    g.font = '22px Georgia, serif'; g.fillStyle = '#8d7443'; g.fillText('Nº 1 · SHADOW STUDY', 256, 94);
-    var tex = new THREE.CanvasTexture(c);
-    if(THREE.SRGBColorSpace !== undefined) tex.colorSpace = THREE.SRGBColorSpace;
+    g.font = '21px Georgia, serif'; g.fillStyle = '#8d7443'; g.fillText('Nº 1 · ' + (short || 'SANTOS PAVÉ') + ' · FORM STUDY', 256, 94);
+    plaqueTex.needsUpdate = true;
+  }
+  drawPlaque(FORM_DATA[currentFormId].short);
+  (function(){
     var plaque = new THREE.Mesh(
-      new THREE.BoxGeometry(1.15, 0.29, 0.03),
-      new THREE.MeshStandardMaterial({map:tex, roughness:0.4, metalness:0.65})
+      new THREE.BoxGeometry(1.3, 0.29, 0.03),
+      new THREE.MeshStandardMaterial({map:plaqueTex, roughness:0.4, metalness:0.65})
     );
     plaque.position.set(0, -1.78, 1.63);
     plaque.rotation.x = -0.06;
@@ -568,153 +671,257 @@
   })();
   scene.add(plinth);
 
-  /* ----- Dial wake texture (dead-front: dark until Act 03) ----- */
+  /* ----- Dial wake texture: SAME core data, laid out per form -----
+     Reading order on every form: time, heart, steps, system.
+     Data never changes: 10:09 · HR 72 · 6,204 steps · RATNĀ OS */
   var dialCanvas = document.createElement('canvas'); dialCanvas.width = 512; dialCanvas.height = 512;
   var dialTex = new THREE.CanvasTexture(dialCanvas);
   if(THREE.SRGBColorSpace !== undefined) dialTex.colorSpace = THREE.SRGBColorSpace;
+  function dialGlowBg(g, glow){
+    var grad = g.createRadialGradient(256,256,40,256,256,250);
+    grad.addColorStop(0,'rgba(64,32,18,0.95)'); grad.addColorStop(0.7,'rgba(28,14,10,0.9)'); grad.addColorStop(1,'rgba(10,5,3,0)');
+    g.fillStyle = grad; g.fillRect(0,0,512,512);
+  }
   function drawDial(glow){
     var g = dialCanvas.getContext('2d');
+    var form = currentFormId;
     g.clearRect(0,0,512,512);
-    g.fillStyle = '#070403'; g.beginPath(); g.arc(256,256,256,0,Math.PI*2); g.fill();
-    /* faint chapter marks, always barely there */
-    g.strokeStyle = 'rgba(192,160,98,0.20)'; g.lineWidth = 3;
-    for(var i=0;i<12;i++){
-      var a = i*Math.PI/6;
-      g.beginPath();
-      g.moveTo(256+Math.cos(a)*212, 256+Math.sin(a)*212);
-      g.lineTo(256+Math.cos(a)*232, 256+Math.sin(a)*232);
-      g.stroke();
-    }
-    if(glow > 0.01){
-      g.save(); g.globalAlpha = glow;
-      var grad = g.createRadialGradient(256,256,40,256,256,250);
-      grad.addColorStop(0,'rgba(64,32,18,0.95)');
-      grad.addColorStop(0.7,'rgba(28,14,10,0.9)');
-      grad.addColorStop(1,'rgba(10,5,3,0)');
-      g.fillStyle = grad; g.beginPath(); g.arc(256,256,256,0,Math.PI*2); g.fill();
-      g.textAlign = 'center';
-      g.fillStyle = '#f4d9a0';
-      g.font = '300 118px Georgia, serif';
-      g.shadowColor = 'rgba(255,180,90,0.85)'; g.shadowBlur = 34*glow;
-      g.fillText('10:09', 256, 268);
-      g.shadowBlur = 12*glow;
-      g.font = '30px Georgia, serif'; g.fillStyle = '#c8a76a';
-      g.fillText('R A T N Ā', 256, 168);
-      g.font = '26px Georgia, serif'; g.fillStyle = '#d9c193';
-      g.fillText('HR 72', 196, 348);
-      g.fillText('6,204 steps', 330, 348);
-      g.font = '21px Georgia, serif'; g.fillStyle = '#9a7c4c';
-      g.fillText('RATNĀ OS', 256, 402);
-      g.restore();
+    g.fillStyle = '#070403'; g.fillRect(0,0,512,512);
+    g.textAlign = 'center';
+    if(form === 'santos'){
+      /* faint pavé grid + Roman hints in shadow */
+      g.strokeStyle = 'rgba(192,160,98,0.10)'; g.lineWidth = 1;
+      for(var gx=64; gx<512; gx+=64){ g.beginPath(); g.moveTo(gx,0); g.lineTo(gx,512); g.stroke(); g.beginPath(); g.moveTo(0,gx); g.lineTo(512,gx); g.stroke(); }
+      g.fillStyle = 'rgba(192,160,98,0.30)'; g.font = '28px Georgia, serif';
+      g.fillText('XII',256,42); g.fillText('VI',256,492); g.fillText('IX',30,264); g.fillText('III',482,264);
+      if(glow > 0.01){
+        g.save(); g.globalAlpha = glow; dialGlowBg(g, glow);
+        g.fillStyle = '#c8a76a'; g.font = '28px Georgia, serif'; g.shadowColor='rgba(255,180,90,0.7)'; g.shadowBlur=10*glow;
+        g.fillText('R A T N Ā',256,118);
+        g.fillStyle = '#f4d9a0'; g.font = '300 104px Georgia, serif'; g.shadowBlur=30*glow;
+        g.fillText('10:09',256,238);
+        /* pulse line: a row of stones lighting at the pulse */
+        for(var pd=0; pd<5; pd++){ var px=196+pd*30; g.beginPath(); g.arc(px,272,7,0,Math.PI*2); g.fillStyle = pd<3 ? '#ffcf8a' : 'rgba(200,167,106,0.35)'; g.fill(); }
+        /* grid-order data cells */
+        g.shadowBlur=6*glow; g.font='25px Georgia, serif'; g.fillStyle='#d9c193';
+        g.strokeStyle='rgba(192,160,98,0.35)'; g.strokeRect(56,300,190,72); g.strokeRect(266,300,190,72);
+        g.fillText('HR 72',151,346); g.fillText('6,204 steps',361,346);
+        g.font='20px Georgia, serif'; g.fillStyle='#9a7c4c'; g.fillText('RATNĀ OS',256,402);
+        /* power as the bottom row of stones */
+        g.font='16px Georgia, serif'; g.fillStyle='#9a7c4c'; g.fillText('POWER',256,438);
+        for(var pw=0; pw<8; pw++){ var wx=160+pw*28; g.beginPath(); g.arc(wx,466,8,0,Math.PI*2); g.fillStyle = pw<6 ? '#ffcf8a' : 'rgba(200,167,106,0.25)'; g.fill(); }
+        g.restore();
+      }
+    } else if(form === 'crash'){
+      /* warped chapter marks + gear silhouettes in shadow */
+      g.strokeStyle='rgba(192,160,98,0.20)'; g.lineWidth=3;
+      for(var ci=0; ci<12; ci++){ var ca=ci*Math.PI/6; var wx2=0.22*Math.sin(2*ca+0.6), wy2=0.16*Math.cos(3*ca);
+        g.beginPath(); g.moveTo(256+(Math.cos(ca)*200)+wx2*60,256+(Math.sin(ca)*200)+wy2*60); g.lineTo(256+(Math.cos(ca)*222)+wx2*60,256+(Math.sin(ca)*222)+wy2*60); g.stroke(); }
+      function gearOutline(cx,cy,r){ g.save(); g.translate(cx,cy); g.strokeStyle='rgba(192,160,98,0.22)'; g.lineWidth=2; g.beginPath(); g.arc(0,0,r,0,Math.PI*2); g.stroke(); g.beginPath(); g.arc(0,0,r*0.55,0,Math.PI*2); g.stroke();
+        for(var gt=0; gt<8; gt++){ g.rotate(Math.PI/4); g.strokeRect(r-4,-5,10,10); } g.restore(); }
+      gearOutline(128,132,52); gearOutline(386,206,64); gearOutline(176,392,58);
+      if(glow > 0.01){
+        g.save(); g.globalAlpha=glow; dialGlowBg(g, glow);
+        g.shadowColor='rgba(255,180,90,0.7)';
+        /* gears carry the data */
+        g.fillStyle='#d9c193'; g.font='24px Georgia, serif'; g.shadowBlur=8*glow;
+        g.fillText('72',128,124); g.font='16px Georgia, serif'; g.fillText('HR',128,148);
+        g.font='22px Georgia, serif'; g.fillText('6,204',386,200); g.font='15px Georgia, serif'; g.fillText('STEPS',386,224);
+        /* calm undistorted centre plate carries the time */
+        g.shadowBlur=18*glow; g.fillStyle='rgba(26,15,10,0.96)'; g.strokeStyle='rgba(192,160,98,0.55)'; g.lineWidth=2;
+        g.beginPath(); if(g.roundRect) g.roundRect(116,196,280,132,14); else g.rect(116,196,280,132); g.fill(); g.stroke();
+        g.fillStyle='#c8a76a'; g.font='24px Georgia, serif'; g.fillText('R A T N Ā',256,232);
+        g.fillStyle='#f4d9a0'; g.font='300 76px Georgia, serif'; g.shadowBlur=26*glow; g.fillText('10:09',256,306);
+        /* mainspring barrel, bottom-left: power */
+        g.shadowBlur=10*glow; g.strokeStyle='#c8a76a'; g.lineWidth=3; g.beginPath(); g.arc(96,424,46, -Math.PI*0.85, Math.PI*0.55); g.stroke();
+        g.strokeStyle='rgba(192,160,98,0.4)'; g.lineWidth=2; g.beginPath(); g.arc(96,424,30,0,Math.PI*2); g.stroke(); g.beginPath(); g.arc(96,424,16,0,Math.PI*2); g.stroke();
+        g.fillStyle='#9a7c4c'; g.font='15px Georgia, serif'; g.fillText('POWER',96,492);
+        g.fillStyle='#9a7c4c'; g.font='20px Georgia, serif'; g.fillText('RATNĀ OS',392,462);
+        g.restore();
+      }
+    } else {
+      /* offshore: 8 fixed app positions on the bezel ring */
+      for(var oi=0; oi<8; oi++){ var oa=oi*Math.PI/4 - Math.PI/2; g.beginPath(); g.arc(256+Math.cos(oa)*222,256+Math.sin(oa)*222,9,0,Math.PI*2); g.fillStyle = glow>0.05 ? 'rgba(255,207,138,0.9)' : 'rgba(192,160,98,0.25)'; g.fill(); }
+      function subdial(cx,cy,r,label){ g.beginPath(); g.arc(cx,cy,r,0,Math.PI*2); g.strokeStyle='rgba(192,160,98,0.38)'; g.lineWidth=2; g.stroke(); g.fillStyle='rgba(154,124,76,0.9)'; g.font='14px Georgia, serif'; g.fillText(label,cx,cy+r+20); }
+      subdial(138,286,62,'HEALTH'); subdial(374,286,62,'ACTIVITY'); subdial(256,398,50,'RESERVE');
+      g.strokeStyle='rgba(192,160,98,0.20)'; g.lineWidth=3;
+      for(var mi2=0; mi2<12; mi2++){ var ma=mi2*Math.PI/6; g.beginPath(); g.moveTo(256+Math.cos(ma)*186,256+Math.sin(ma)*186); g.lineTo(256+Math.cos(ma)*202,256+Math.sin(ma)*202); g.stroke(); }
+      if(glow > 0.01){
+        g.save(); g.globalAlpha=glow; dialGlowBg(g, glow);
+        g.fillStyle='#c8a76a'; g.font='26px Georgia, serif'; g.shadowColor='rgba(255,180,90,0.7)'; g.shadowBlur=10*glow; g.fillText('R A T N Ā',256,92);
+        g.fillStyle='#f4d9a0'; g.font='300 88px Georgia, serif'; g.shadowBlur=28*glow; g.fillText('10:09',256,188);
+        g.shadowBlur=8*glow; g.fillStyle='#d9c193';
+        g.font='30px Georgia, serif'; g.fillText('72',138,282); g.font='15px Georgia, serif'; g.fillText('HR',138,306);
+        g.font='24px Georgia, serif'; g.fillText('6,204',374,282); g.font='15px Georgia, serif'; g.fillText('STEPS',374,306);
+        /* reserve as a power-reserve complication: gauge arc + needle */
+        g.strokeStyle='#ffcf8a'; g.lineWidth=4; g.beginPath(); g.arc(256,398,38,-Math.PI*0.9, Math.PI*0.35); g.stroke();
+        g.strokeStyle='#f4d9a0'; g.lineWidth=3; g.beginPath(); g.moveTo(256,398); g.lineTo(256+Math.cos(-0.4)*32,398+Math.sin(-0.4)*32); g.stroke();
+        g.font='16px Georgia, serif'; g.fillStyle='#d9c193'; g.fillText('82%',256,404);
+        g.font='19px Georgia, serif'; g.fillStyle='#9a7c4c'; g.shadowBlur=6*glow; g.fillText('RATNĀ OS',256,492);
+        g.restore();
+      }
     }
     dialTex.needsUpdate = true;
   }
   drawDial(0);
 
-  /* ----- The watch: a shadow built from simple forms ----- */
-  var watch = new THREE.Group();
-
-  /* Strap arcs above and below */
-  function strap(sign){
-    var pts = [];
-    var steps = 24;
-    for(var i=0;i<=steps;i++){
-      var t = i/steps;
-      var y = sign * (0.95 + t*1.85);
-      var z = -Math.sin(t*Math.PI*0.62) * 0.85;
-      var x = Math.sin(t*Math.PI) * 0.03;
-      pts.push(new THREE.Vector3(x, y, z));
-    }
-    var curve = new THREE.CatmullRomCurve3(pts);
-    var geo = new THREE.TubeGeometry(curve, 40, 0.30, 12, false);
-    /* flatten the tube into a strap band */
-    geo.scale(1.45, 1, 0.42);
-    var m = new THREE.Mesh(geo, matStrap);
-    m.castShadow = true;
-    return m;
-  }
-  watch.add(strap(1));
-  watch.add(strap(-1));
-  /* strap keepers near case */
-  [-1,1].forEach(function(s){
-    var lug = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.34, 0.3), matShadowMetal);
-    lug.position.set(0, s*1.02, 0); lug.castShadow = true;
-    watch.add(lug);
-  });
-
-  /* Case: turned profile via Lathe, axis rotated to face viewer */
-  var profile = [];
-  profile.push(new THREE.Vector2(0.0, -0.20));
-  profile.push(new THREE.Vector2(0.78, -0.20));
-  profile.push(new THREE.Vector2(1.02, -0.13));
-  profile.push(new THREE.Vector2(1.10, 0.0));
-  profile.push(new THREE.Vector2(1.04, 0.13));
-  profile.push(new THREE.Vector2(0.86, 0.21));
-  profile.push(new THREE.Vector2(0.0, 0.21));
-  var caseMesh = new THREE.Mesh(new THREE.LatheGeometry(profile, 64), matShadowMetal);
-  caseMesh.geometry.rotateX(Math.PI/2);
-  caseMesh.castShadow = true;
-  watch.add(caseMesh);
-
-  /* Bezel ring */
-  var bezel = new THREE.Mesh(new THREE.TorusGeometry(1.06, 0.075, 14, 72), matBezel);
-  bezel.position.z = 0.16; bezel.castShadow = true;
-  watch.add(bezel);
-  var bezelTrim = new THREE.Mesh(new THREE.TorusGeometry(1.06, 0.016, 8, 72), matGoldDark);
-  bezelTrim.position.z = 0.235;
-  watch.add(bezelTrim);
-
-  /* Dial (dark, wakes in Act 03) */
-  var dial = new THREE.Mesh(
-    new THREE.CircleGeometry(0.94, 56),
-    new THREE.MeshBasicMaterial({map:dialTex, transparent:true})
-  );
-  dial.position.z = 0.222;
-  watch.add(dial);
-  /* sapphire sheen */
-  var glass = new THREE.Mesh(
-    new THREE.CircleGeometry(0.97, 56),
-    new THREE.MeshPhysicalMaterial({color:0x1a120c, roughness:0.08, metalness:0, transparent:true, opacity:0.22})
-  );
-  glass.position.z = 0.248;
-  watch.add(glass);
-
-  /* Crown + pusher */
-  var crown = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.115, 0.14, 24), matGoldDark);
-  crown.geometry.rotateZ(Math.PI/2);
-  crown.position.set(1.18, 0.08, 0); crown.castShadow = true;
-  watch.add(crown);
-  var pusher = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.1, 16), matShadowMetal);
-  pusher.geometry.rotateZ(Math.PI/2);
-  pusher.position.set(1.13, 0.52, 0);
-  watch.add(pusher);
-  var pusher2 = pusher.clone(); pusher2.position.y = -0.4;
-  watch.add(pusher2);
-
-  /* ----- Gem ring: 24 stones that light one by one ----- */
+  /* ----- Watch builders: three jewel-encrusted shadow forms ----- */
   var GEM_COUNT = 24;
   var gems = [];
+  var currentGlass = null;
   var gemGeo = new THREE.OctahedronGeometry(0.062);
-  for(var gi=0; gi<GEM_COUNT; gi++){
-    var ang = (gi/GEM_COUNT) * Math.PI*2 - Math.PI/2;
-    var gm = new THREE.Mesh(gemGeo, new THREE.MeshStandardMaterial({
-      color:0x2a1c0e, roughness:0.25, metalness:0.3,
-      emissive:0xffb45e, emissiveIntensity:0
-    }));
-    gm.position.set(Math.cos(ang)*1.06, Math.sin(ang)*1.06, 0.26);
-    watch.add(gm);
-    gems.push(gm);
+  function makeGem(x,y,z,scale){
+    var gm = new THREE.Mesh(gemGeo, new THREE.MeshStandardMaterial({color:0x2a1c0e, roughness:0.25, metalness:0.3, emissive:0xffb45e, emissiveIntensity:0}));
+    gm.position.set(x,y,z); gm.userData.baseScale = scale || 1; gm.scale.setScalar(scale || 1);
+    return gm;
   }
-  /* the setting prongs: tiny gold ticks behind each stone */
-  for(var pi=0; pi<GEM_COUNT; pi++){
-    var pang = (pi/GEM_COUNT) * Math.PI*2 - Math.PI/2;
-    var prong = new THREE.Mesh(new THREE.BoxGeometry(0.03,0.03,0.05), matGoldDark);
-    prong.position.set(Math.cos(pang)*1.06, Math.sin(pang)*1.06, 0.21);
-    watch.add(prong);
+  function fixUVs(geo,w,h){
+    var pos = geo.attributes.position, uv = geo.attributes.uv;
+    if(!pos || !uv) return geo;
+    for(var i=0;i<pos.count;i++){ uv.setXY(i, pos.getX(i)/w + 0.5, pos.getY(i)/h + 0.5); }
+    uv.needsUpdate = true; return geo;
+  }
+  function roundedRectShape(w,h,r){
+    var sh = new THREE.Shape(), x=-w/2, y=-h/2;
+    sh.moveTo(x+r,y); sh.lineTo(x+w-r,y); sh.quadraticCurveTo(x+w,y,x+w,y+r); sh.lineTo(x+w,y+h-r); sh.quadraticCurveTo(x+w,y+h,x+w-r,y+h); sh.lineTo(x+r,y+h); sh.quadraticCurveTo(x,y+h,x,y+h-r); sh.lineTo(x,y+r); sh.quadraticCurveTo(x,y,x+r,y);
+    return sh;
+  }
+  function crashPoints(scale){
+    var pts=[]; for(var i=0;i<44;i++){ var a=i/44*Math.PI*2; var px=Math.cos(a)*1.02 + 0.22*Math.sin(2*a+0.6); var py=Math.sin(a)*1.26 + 0.17*Math.cos(3*a); pts.push(new THREE.Vector2(px*scale, py*scale)); } return pts;
+  }
+  function strapMesh(sign, widthScale){
+    var pts=[], steps=24;
+    for(var i=0;i<=steps;i++){ var t=i/steps; pts.push(new THREE.Vector3(Math.sin(t*Math.PI)*0.03, sign*(0.95+t*1.85), -Math.sin(t*Math.PI*0.62)*0.85)); }
+    var geo = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 40, 0.30, 12, false);
+    geo.scale(1.45*(widthScale||1),1,0.42);
+    var m = new THREE.Mesh(geo, matStrap); m.castShadow=true; return m;
+  }
+  function addStraps(group, widthScale, lugW){
+    group.add(strapMesh(1,widthScale)); group.add(strapMesh(-1,widthScale));
+    [-1,1].forEach(function(s){ var lug=new THREE.Mesh(new THREE.BoxGeometry(lugW||0.62,0.34,0.3), matShadowMetal); lug.position.set(0,s*1.02,0); lug.castShadow=true; group.add(lug); });
+  }
+  function makeDialMesh(geo, z){
+    fixUVs(geo, 2, 2);
+    var d = new THREE.Mesh(geo, new THREE.MeshBasicMaterial({map:dialTex, transparent:true}));
+    d.position.z = z; return d;
+  }
+  function makeGlass(geo, z){
+    var gl = new THREE.Mesh(geo, new THREE.MeshPhysicalMaterial({color:0x1a120c, roughness:0.08, metalness:0, transparent:true, opacity:0.22}));
+    gl.position.z = z; return gl;
+  }
+  function screw(x,y,z,r){
+    var sc = new THREE.Mesh(new THREE.CylinderGeometry(r||0.055, r||0.055, 0.045, 16), matGoldDark);
+    sc.geometry = sc.geometry.clone(); sc.geometry.rotateX(Math.PI/2); sc.position.set(x,y,z); return sc;
   }
 
-  watch.position.y = 0.55;
+  function buildSantos(){
+    var grp = new THREE.Group(); gems = [];
+    addStraps(grp, 1.05, 0.9);
+    var caseGeo = new THREE.ExtrudeGeometry(roundedRectShape(2.18,2.18,0.38), {depth:0.30, bevelEnabled:true, bevelThickness:0.03, bevelSize:0.03, bevelSegments:2, steps:1});
+    caseGeo.translate(0,0,-0.15);
+    var cm = new THREE.Mesh(caseGeo, matShadowMetal); cm.castShadow=true; grp.add(cm);
+    var bez = new THREE.Mesh(fixUVs(new THREE.ShapeGeometry(roundedRectShape(2.02,2.02,0.32)),2,2), matBezel); bez.position.z=0.17; grp.add(bez);
+    var dial = makeDialMesh(new THREE.ShapeGeometry(roundedRectShape(1.84,1.84,0.26)), 0.185); grp.add(dial);
+    currentGlass = makeGlass(new THREE.ShapeGeometry(roundedRectShape(1.9,1.9,0.28)), 0.215); grp.add(currentGlass);
+    /* exposed bezel screws: corners + mid-edges */
+    [[-0.94,-0.94],[0.94,-0.94],[-0.94,0.94],[0.94,0.94],[0,-0.99],[0,0.99],[-0.99,0],[0.99,0]].forEach(function(p){ grp.add(screw(p[0],p[1],0.20,0.06)); });
+    /* crown */
+    var cr = new THREE.Mesh(new THREE.CylinderGeometry(0.12,0.12,0.15,20), matGoldDark); cr.geometry.rotateZ(Math.PI/2); cr.position.set(1.2,0,0); grp.add(cr);
+    /* pavé grid: 24 points, 4 cols x 6 rows, ordered row by row (top first) */
+    var rows=[0.78,0.47,0.16,-0.16,-0.47,-0.78], cols=[-0.68,-0.23,0.23,0.68];
+    rows.forEach(function(yy){ cols.forEach(function(xx){ var gm=makeGem(xx,yy,0.27,0.82); grp.add(gm); gems.push(gm);
+      var pr=new THREE.Mesh(new THREE.BoxGeometry(0.03,0.03,0.05), matGoldDark); pr.position.set(xx,yy,0.22); grp.add(pr); }); });
+    return grp;
+  }
+
+  function buildCrash(){
+    var grp = new THREE.Group(); gems = [];
+    addStraps(grp, 0.92, 0.6);
+    var shape = new THREE.Shape(crashPoints(1));
+    var caseGeo = new THREE.ExtrudeGeometry(shape, {depth:0.28, bevelEnabled:true, bevelThickness:0.03, bevelSize:0.02, bevelSegments:2, steps:1});
+    caseGeo.translate(0,0,-0.14);
+    var cm = new THREE.Mesh(caseGeo, matShadowMetal); cm.castShadow=true; grp.add(cm);
+    var dialShape = new THREE.Shape(crashPoints(0.84));
+    var dial = makeDialMesh(new THREE.ShapeGeometry(dialShape), 0.165); dial.geometry = fixUVs(dial.geometry, 2.1, 2.6); grp.add(dial);
+    currentGlass = makeGlass(new THREE.ShapeGeometry(new THREE.Shape(crashPoints(0.87))), 0.20); currentGlass.geometry = fixUVs(currentGlass.geometry,2.1,2.6); grp.add(currentGlass);
+    /* skeleton bridges */
+    function bridge(pts2, r){
+      var v = pts2.map(function(p){ return new THREE.Vector3(p[0],p[1],0.20); });
+      var tube = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(v), 32, r||0.085, 8, false), matBezel);
+      return {mesh:tube, curve:new THREE.CatmullRomCurve3(v)};
+    }
+    var b1 = bridge([[-0.68,0.82],[-0.2,0.3],[0.18,-0.22],[0.62,-0.88]], 0.095); /* longest bridge */
+    var b2 = bridge([[-0.78,-0.1],[-0.25,0.08],[0.35,0.02],[0.82,0.28]], 0.07);
+    var b3 = bridge([[-0.1,0.95],[0.08,0.4],[-0.02,-0.3],[0.12,-0.95]], 0.07);
+    grp.add(b1.mesh); grp.add(b2.mesh); grp.add(b3.mesh);
+    /* three gear silhouettes */
+    [[-0.5,0.55,0.27],[0.52,0.18,0.32],[-0.22,-0.68,0.25]].forEach(function(ge){
+      var gear = new THREE.Group();
+      var disc = new THREE.Mesh(new THREE.CylinderGeometry(ge[2],ge[2],0.05,24), matShadowMetal); disc.geometry.rotateX(Math.PI/2); gear.add(disc);
+      var hub = new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,0.08,12), matGoldDark); hub.geometry.rotateX(Math.PI/2); gear.add(hub);
+      for(var ti=0; ti<10; ti++){ var ta=ti/10*Math.PI*2; var tooth=new THREE.Mesh(new THREE.BoxGeometry(0.07,0.07,0.05), matBezel); tooth.position.set(Math.cos(ta)*(ge[2]+0.02), Math.sin(ta)*(ge[2]+0.02), 0); gear.add(tooth); }
+      gear.position.set(ge[0],ge[1],0.21); grp.add(gear);
+    });
+    var cr = new THREE.Mesh(new THREE.CylinderGeometry(0.11,0.11,0.14,20), matGoldDark); cr.geometry.rotateZ(Math.PI/2); cr.position.set(1.14,0.34,0); grp.add(cr);
+    /* gems along the bridges: longest first (12), then the other two (6 + 6) */
+    [b1,b2,b3].forEach(function(b, bi){
+      var n = bi===0 ? 12 : 6;
+      for(var i=0;i<n;i++){ var pt = b.curve.getPoint((i+0.5)/n); var gm = makeGem(pt.x, pt.y, 0.30, 0.9); grp.add(gm); gems.push(gm); }
+    });
+    return grp;
+  }
+
+  function buildOffshore(){
+    var grp = new THREE.Group(); gems = [];
+    addStraps(grp, 1.35, 0.95);
+    var profile=[]; profile.push(new THREE.Vector2(0,-0.22)); profile.push(new THREE.Vector2(0.82,-0.22)); profile.push(new THREE.Vector2(1.08,-0.14)); profile.push(new THREE.Vector2(1.16,0)); profile.push(new THREE.Vector2(1.09,0.14)); profile.push(new THREE.Vector2(0.9,0.22)); profile.push(new THREE.Vector2(0,0.22));
+    var cm = new THREE.Mesh(new THREE.LatheGeometry(profile,56), matShadowMetal); cm.geometry.rotateX(Math.PI/2); cm.castShadow=true; grp.add(cm);
+    /* bold octagonal bezel */
+    var oct = new THREE.Mesh(new THREE.CylinderGeometry(1.17,1.17,0.20,8), matBezel);
+    oct.geometry.rotateX(Math.PI/2); oct.geometry.rotateZ(Math.PI/8); oct.position.z=0.14; oct.castShadow=true; grp.add(oct);
+    var dial = new THREE.Mesh(new THREE.CircleGeometry(0.96,48), new THREE.MeshBasicMaterial({map:dialTex, transparent:true})); dial.position.z=0.245; grp.add(dial);
+    currentGlass = new THREE.Mesh(new THREE.CircleGeometry(0.99,48), new THREE.MeshPhysicalMaterial({color:0x1a120c, roughness:0.08, metalness:0, transparent:true, opacity:0.22})); currentGlass.position.z=0.27; grp.add(currentGlass);
+    /* three subdial rings in 3D, matching the dial layout */
+    [[-0.46,0.06],[0.46,0.06],[0,-0.55]].forEach(function(p, idx){ var ring=new THREE.Mesh(new THREE.TorusGeometry(idx===2?0.19:0.24,0.018,8,40), matGoldDark); ring.position.set(p[0],p[1],0.26); grp.add(ring); });
+    /* chunky crown + two pushers */
+    var cr = new THREE.Mesh(new THREE.CylinderGeometry(0.16,0.16,0.20,20), matGoldDark); cr.geometry.rotateZ(Math.PI/2); cr.position.set(1.32,0,0); cr.castShadow=true; grp.add(cr);
+    [[0.62],[-0.58]].forEach(function(py){ var pu=new THREE.Mesh(new THREE.BoxGeometry(0.16,0.20,0.18), matShadowMetal); pu.position.set(1.22,py[0],0); grp.add(pu); });
+    /* 24 points on the octagon ring: 8 large at the vertices, 16 smaller between */
+    var ordered=[];
+    for(var vi=0; vi<8; vi++){
+      var va = vi*Math.PI/4 + Math.PI/8;
+      ordered.push({x:Math.cos(va)*1.17, y:Math.sin(va)*1.17, s:1.65});
+      var a1 = va + Math.PI/12, a2 = va + Math.PI/6;
+      ordered.push({x:Math.cos(a1)*1.10, y:Math.sin(a1)*1.10, s:0.8});
+      ordered.push({x:Math.cos(a2)*1.10, y:Math.sin(a2)*1.10, s:0.8});
+    }
+    ordered.forEach(function(o){ var gm=makeGem(o.x,o.y,0.28,o.s); grp.add(gm); gems.push(gm);
+      var pr=new THREE.Mesh(new THREE.BoxGeometry(0.03,0.03,0.05), matGoldDark); pr.position.set(o.x,o.y,0.22); grp.add(pr); });
+    return grp;
+  }
+
+  var watch = null;
+  function buildWatch(form){
+    var grp = form==='crash' ? buildCrash() : (form==='offshore' ? buildOffshore() : buildSantos());
+    grp.position.y = 0.55;
+    return grp;
+  }
+  watch = buildWatch(currentFormId);
   scene.add(watch);
+  window.__ratnaSwap = function(form){
+    var veil = document.getElementById('fade-veil');
+    if(veil) veil.classList.add('on');
+    setTimeout(function(){
+      var old = watch;
+      watch = buildWatch(form);
+      watch.rotation.y = old.rotation.y; watch.position.y = old.position.y;
+      scene.remove(old); scene.add(watch);
+      lastGlowBand = -1; drawDial(0);
+      drawPlaque(FORM_DATA[form].short);
+      if(veil) veil.classList.remove('on');
+    }, 230);
+  };
+
 
   /* Dust motes for atmosphere */
   var moteCount = 130;
@@ -799,22 +1006,26 @@
       camera.position.z += (camZ - camera.position.z)*0.04;
       camera.lookAt(0, 0.35, 0);
 
-      /* light sweep travels the ring; stones catch it one by one */
-      var sweep = (t*0.55) % (Math.PI*2);
+      /* light sweep travels each form in its own order; stones catch it one by one.
+         Santos: row by row. Crash: along the bridges. Offshore: around the octagon.
+         In every case the gem order in the array IS the sweep order. */
       var lit = gemLitCount(p);
-      for(var i=0;i<GEM_COUNT;i++){
-        var gAng = (i/GEM_COUNT)*Math.PI*2 - Math.PI/2;
-        var d = Math.atan2(Math.sin(gAng - sweep), Math.cos(gAng - sweep));
-        var near = Math.max(0, 1 - Math.abs(d)/0.55);
+      var sweepIdx = (t*2.4) % GEM_COUNT;
+      for(var i=0;i<gems.length;i++){
+        var linD = Math.abs(i - sweepIdx);
+        var circD = Math.min(linD, GEM_COUNT - linD);
+        var dist = currentFormId === 'offshore' ? circD : linD;
+        var near = Math.max(0, 1 - dist/2.2);
         var base = i < lit ? 0.85 : 0.0;
         var sparkle = i < lit ? (0.55 + 0.45*Math.sin(t*2.2 + i*1.7)) : 0;
         var inten = base * (0.55 + sparkle*0.5) + near*near * (i <= lit ? 1.6 : 0.55);
         gems[i].material.emissiveIntensity = inten;
-        var s = 1 + near*0.35 + (i < lit ? 0.12 : 0);
-        gems[i].scale.setScalar(s);
+        var bs = gems[i].userData.baseScale || 1;
+        gems[i].scale.setScalar(bs * (1 + near*0.35 + (i < lit ? 0.12 : 0)));
       }
-      /* sweep light rides the bezel front */
-      sweepLight.position.set(Math.cos(sweep)*1.5, Math.sin(sweep)*1.5 + 0.55, 1.5);
+      /* sweep light rides the front of the lit gem nearest the sweep head */
+      var headIdx = Math.min(gems.length-1, Math.floor(sweepIdx));
+      if(gems[headIdx]) sweepLight.position.set(gems[headIdx].position.x*1.25, gems[headIdx].position.y*1.25 + 0.55, 1.5);
       sweepLight.intensity = 2.2 + p*3.5;
       ember.intensity = 10 + p*7;
       rim.intensity = 2.2 + p*0.9;
@@ -823,7 +1034,7 @@
       var glow = Math.min(1, Math.max(0, (p - 0.78) / 0.2));
       var band = Math.round(glow*16);
       if(band !== lastGlowBand){ lastGlowBand = band; drawDial(glow * (0.9 + 0.1*Math.sin(t*1.4))); }
-      glass.material.opacity = 0.22 - glow*0.1;
+      if(currentGlass) currentGlass.material.opacity = 0.22 - glow*0.1;
 
       motes.rotation.y = t*0.014;
 
