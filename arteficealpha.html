@@ -9,14 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&family=Marcellus&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap"
       rel="stylesheet"
       media="print"
       onload="this.onload=null;this.media='all'"
     />
     <noscript>
       <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&family=Marcellus&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap"
         rel="stylesheet"
       />
     </noscript>
@@ -43,9 +43,9 @@
         --aurora-text: #ebeefa;
         --aurora-text-dim: #aab6d9;
         --aurora-gold: #e1bc65;
-        --logo: "Italiana", Georgia, serif;
-        --serif: "Marcellus", Georgia, serif;
-        --sans: "DM Sans", "Helvetica Neue", sans-serif;
+        --logo: "Cormorant Garamond", Georgia, serif;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --sans: "Jost", "Avenir Next", "Segoe UI", sans-serif;
         color-scheme: dark;
       }
       :root[data-theme="aurora"] {
@@ -181,7 +181,7 @@
       }
       .hero-copy { pointer-events: auto; }
       .wordmark {
-        font-family: var(--logo); font-weight: 400;
+        font-family: var(--logo); font-weight: 500;
         font-size: 1.35rem; letter-spacing: 0.42em; text-indent: 0.02em;
         color: var(--gold-bright); margin: 0 0 1.6rem;
         text-shadow: 0 2px 18px rgba(0,0,0,0.7);
@@ -263,24 +263,25 @@
       /* ---------- invite: flat and fast, like the real invite page ---------- */
       .invite-wrap { max-width: 34rem; margin: 0 auto; width: 100%; }
       .invite-card {
-        pointer-events: auto; background: var(--plum-900);
+        pointer-events: auto; background: var(--aurora-panel);
         border: 1px solid var(--plate-line);
-        padding: clamp(1.6rem, 4vw, 2.8rem);
+        padding: clamp(2rem, 5vw, 3rem) clamp(1.6rem, 4vw, 2.8rem);
       }
       .invite-card h2 {
         font-family: var(--serif); font-weight: 400;
-        font-size: clamp(2rem, 5vw, 2.9rem); line-height: 1.05;
-        color: var(--gold-bright); margin: 0;
+        font-size: clamp(2.4rem, 6vw, 3.9rem); line-height: 1.05;
+        color: var(--gold-bright); margin: 0.15rem 0 0;
       }
-      .invite-card > p { color: var(--paper-dim); line-height: 1.65; margin: 1rem 0 0; }
+      .invite-card .rule { margin: 1.15rem 0 1.25rem; }
+      .invite-card > p { color: var(--paper-dim); line-height: 1.65; margin: 0; }
       .invite-form { margin-top: 1.6rem; display: grid; gap: 1rem; }
       .field label {
         display: block; font-size: 0.7rem; letter-spacing: 0.2em;
         text-transform: uppercase; color: var(--gold-bright); margin-bottom: 0.4rem; font-weight: 400;
       }
       .field input, .field select {
-        width: 100%; background: var(--plum-950); color: var(--paper);
-        border: 1px solid rgba(201,151,63,0.35); border-radius: 0;
+        width: 100%; background: var(--aurora-950); color: var(--paper);
+        border: 1px solid rgba(225,188,101,0.35); border-radius: 0;
         font-family: var(--sans); font-size: 1rem; font-weight: 400;
         padding: 0.75rem 0.85rem;
       }
@@ -292,8 +293,10 @@
       }
       .invite-done strong { color: var(--gold-bright); font-weight: 500; }
 
-      /* ---------- invite: ALWAYS Aurora Blue (house split) ---------- */
-      /* The show is MAFIA, the invitation is blue — in both toggle states. */
+      /* ---------- invite: Aurora Blue, same palette as the rest of the page ---------- */
+      /* Card, fields and button all resolve to the page's Aurora variables:
+         panel #141B3E, ground #070B24, slate text #EBEFFA, gold #E1BC65 —
+         no leftover tones from any other theme. */
       #invite { position: relative; isolation: isolate; }
       #invite::before {
         content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
@@ -301,11 +304,11 @@
         background:
           radial-gradient(ellipse 55% 60% at 4% 45%, rgba(177,140,255,0.28), rgba(177,140,255,0) 68%),
           radial-gradient(ellipse 55% 60% at 96% 45%, rgba(56,189,248,0.26), rgba(56,189,248,0) 68%),
-          linear-gradient(180deg, rgba(7,11,36,0) 0%, rgba(7,11,36,0.88) 22%, #070b24 55%, #101736 100%);
+          linear-gradient(180deg, rgba(7,11,36,0) 0%, rgba(7,11,36,0.88) 22%, var(--aurora-950) 55%, var(--aurora-900) 100%);
       }
       #invite.inview::before { opacity: 1; }
       #invite .invite-card {
-        background: var(--aurora-900); border-color: rgba(225,188,101,0.48);
+        background: var(--aurora-panel); border-color: var(--plate-line);
         color: var(--aurora-text);
       }
       #invite .invite-card h2 { color: var(--aurora-gold); }
@@ -314,29 +317,35 @@
       #invite .field label { color: var(--aurora-gold); }
       #invite .field input, #invite .field select {
         background: var(--aurora-950); color: var(--aurora-text);
-        border-color: rgba(125,211,252,0.32);
+        border-color: rgba(225,188,101,0.35);
       }
       #invite .field input:focus, #invite .field select:focus {
         outline-color: var(--aurora-gold); border-color: var(--aurora-gold);
       }
-      #invite .btn-solid { background: var(--aurora-gold); border-color: var(--aurora-gold); color: #070b24; }
-      #invite .btn-solid:hover { background: #edd08a; border-color: #edd08a; }
-      #invite .invite-done { border-color: rgba(225,188,101,0.48); color: var(--aurora-text); }
+      #invite .btn-solid { background: var(--aurora-gold); border-color: var(--aurora-gold); color: var(--aurora-950); }
+      #invite .btn-solid:hover { background: var(--aurora-gold); border-color: var(--aurora-gold); color: var(--aurora-950); }
+      #invite .invite-done { border-color: var(--plate-line); color: var(--aurora-text); }
       #invite .invite-done strong { color: var(--aurora-gold); }
 
+      /* Footer lockup: its own quiet zone. Solid Aurora ground (not
+         translucent) so the fixed 3D stage and plinth can never show
+         through or crowd the lockup at any scroll position, and generous
+         padding on every side keeps it clear of the invite card above. */
       footer {
-        position: relative; z-index: 2; pointer-events: none;
-        text-align: center; padding: 0 1rem 5rem;
+        position: relative; z-index: 3; pointer-events: none;
+        text-align: center; padding: 5.5rem 1.25rem 6.5rem;
+        background: var(--aurora-950);
+        border-top: 1px solid var(--plate-line);
       }
       footer .footer-mark {
-        font-family: var(--logo); font-weight: 400;
-        font-size: 1.5rem; letter-spacing: 0.42em; text-indent: 0.42em;
+        font-family: var(--logo); font-weight: 500;
+        font-size: 1.7rem; letter-spacing: 0.42em; text-indent: 0.42em;
         color: var(--gold-bright); margin: 0;
       }
       footer .f-tag {
-        font-family: var(--serif); font-weight: 400;
-        font-size: 1.05rem; letter-spacing: 0.05em;
-        color: var(--paper-dim); margin: 0.7rem 0 0;
+        font-family: var(--serif); font-weight: 500;
+        font-size: 1.3rem; letter-spacing: 0.04em;
+        color: var(--paper-dim); margin: 0.9rem 0 0;
       }
 
       /* ---------- control bar ---------- */
@@ -502,6 +511,7 @@
             <div class="invite-card">
               <p class="act-no">The Invite</p>
               <h2>Craft Together</h2>
+              <div class="rule"></div>
               <p>Artefice opens by invitation. Shows are staged with fabricators first, then paired with streamers, product designers, brands and studios. Leave your name and email to be considered for the first season.</p>
               <form class="invite-form" id="invite-form" novalidate>
                 <div class="field">
@@ -953,9 +963,9 @@
           x.fillStyle = grad; x.fillRect(0, 0, 1024, 256);
           x.strokeStyle = "rgba(46,28,4,0.85)"; x.lineWidth = 6; x.strokeRect(18, 18, 988, 220);
           x.fillStyle = "#2a1a04"; x.textAlign = "center";
-          x.font = "96px Italiana, Georgia, serif";
+          x.font = "500 96px 'Cormorant Garamond', Georgia, serif";
           x.fillText("A R T E F I C E", 512, 128);
-          x.font = "34px Marcellus, Georgia, serif";
+          x.font = "500 34px 'Cormorant Garamond', Georgia, serif";
           x.fillText("C R A F T   T O G E T H E R", 512, 196);
           var tex = new THREE.CanvasTexture(c);
           tex.colorSpace = THREE.SRGBColorSpace;
@@ -1322,15 +1332,16 @@
         frame();
         } /* end initStage */
 
-        /* Wait for the Italiana webfont before building the stage, so the
-           plinth plaque canvas texture is drawn in Italiana, not a fallback.
+        /* Wait for the Cormorant Garamond webfont before building the stage,
+           so the plinth plaque canvas texture is drawn in Cormorant
+           Garamond, not a fallback.
            A timeout keeps the stage from ever hanging on a slow font. */
         function bootStage() {
           var started = false;
           function go() { if (!started) { started = true; setTimeout(initStage, 40); } }
           if (document.fonts && document.fonts.load) {
-            document.fonts.load("34px Marcellus");
-            document.fonts.load("96px Italiana").then(go, go);
+            document.fonts.load("500 34px 'Cormorant Garamond'");
+            document.fonts.load("500 96px 'Cormorant Garamond'").then(go, go);
             if (document.fonts.ready) document.fonts.ready.then(go);
             setTimeout(go, 1500);
           } else { go(); }
