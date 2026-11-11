@@ -9,6 +9,8 @@
   RewriteCond %{HTTP_HOST} ^(www\.)?rucept\.com$ [NC]
   RewriteRule ^(index\.php)?$ https://artefice.rucept.com/ [L,R=301]
   # The /fabbrica path retires on the serving hosts: send it to the artefice front page
+RewriteCond %{HTTP_HOST} ^arteficealpha\.rucept\.com$ [NC]
+RewriteRule ^$ arteficealpha.html [L]
   RewriteCond %{HTTP_HOST} ^(artefice|artifice)\.rucept\.com$ [NC]
   RewriteRule ^fabbrica/?$ https://artefice.rucept.com/ [L,R=301]
   # Clean URLs for legal pages
