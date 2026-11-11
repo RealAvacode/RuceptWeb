@@ -58,6 +58,22 @@
         --plate-line: rgba(225, 188, 101, 0.48);
         --btn-bg: rgba(16, 23, 54, 0.94);
       }
+      /* Aurora Blood: Aurora Blue exactly (same grounds, panels, slate
+         text, gold wordmark/plaque/buttons) — only the accent layer
+         switches to the MAFIA Oxblood blood red, applied below. */
+      :root[data-theme="aurorablood"] {
+        --plum-950: #070b24;
+        --plum-900: #101736;
+        --plum-800: #1b2450;
+        --gold: #e1bc65;
+        --gold-bright: #e1bc65;
+        --gold-dim: #b9974f;
+        --paper: #ebeefa;
+        --paper-dim: #aab6d9;
+        --plate: rgba(16, 23, 54, 0.89);
+        --plate-line: rgba(225, 188, 101, 0.48);
+        --btn-bg: rgba(16, 23, 54, 0.94);
+      }
       /* MAFIA Oxblood: warm brown ground, oxblood panels, antique Arabian
          Nights gold (burnished, bronze-leaning, muted). No cream surfaces. */
       :root[data-theme="oxblood"] {
@@ -81,6 +97,18 @@
       :root[data-theme="oxblood"] .inflate-meter .m-head { color: #c2452f; }
       :root[data-theme="oxblood"] .inflate-meter .m-fill { background: linear-gradient(90deg, #6e1d12, #c2452f); }
       :root[data-theme="oxblood"] #theme-toggle button[aria-pressed="true"] { color: #181010; }
+      /* Aurora Blood grammar: the exact Oxblood blood red, in the exact
+         Oxblood positions only — act kickers, acts-line indices, thin
+         rules and the inflation meter as the one filled accent. Headlines
+         and body stay slate; wordmark, plaque and buttons stay gold. */
+      :root[data-theme="aurorablood"] .act-no { color: #c2452f; }
+      :root[data-theme="aurorablood"] .rule { background: #93301f; }
+      :root[data-theme="aurorablood"] .hero .acts-line span { color: #c2452f; }
+      :root[data-theme="aurorablood"] .inflate-meter .m-head { color: #c2452f; }
+      :root[data-theme="aurorablood"] .inflate-meter .m-fill { background: linear-gradient(90deg, #6e1d12, #c2452f); }
+      :root[data-theme="aurorablood"] #theme-toggle button[aria-pressed="true"] { color: #070b24; }
+      /* The invite section always renders Aurora Blue — never reddened. */
+      :root[data-theme="aurorablood"] #invite .invite-card .act-no { color: var(--aurora-gold); }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       html, body { margin: 0; padding: 0; }
@@ -105,6 +133,7 @@
           radial-gradient(ellipse 38% 28% at 92% 18%, rgba(125,211,252,0.16), rgba(125,211,252,0) 70%);
       }
       :root[data-theme="aurora"] #aurora-glow { opacity: 1; }
+      :root[data-theme="aurorablood"] #aurora-glow { opacity: 1; }
       /* ---------- theme toggle (persistent, by the wordmark) ---------- */
       #theme-toggle {
         position: fixed; top: max(0.9rem, env(safe-area-inset-top)); right: 0.9rem;
@@ -127,6 +156,7 @@
       #theme-toggle button:focus-visible { outline: 1px solid var(--gold-bright); outline-offset: 2px; }
       #theme-toggle button[aria-pressed="true"] { background: var(--gold); color: #12060e; border-color: var(--gold); }
       :root[data-theme="aurora"] #theme-toggle button[aria-pressed="true"] { color: #070b24; }
+      :root[data-theme="aurorablood"] #theme-toggle button[aria-pressed="true"] { color: #070b24; }
       /* ---------- light switcher (independent of theme, top-right cluster) ---------- */
       #light-toggle {
         position: fixed; top: calc(max(0.9rem, env(safe-area-inset-top)) + 3.35rem); right: 0.9rem;
@@ -149,6 +179,7 @@
       #light-toggle button:focus-visible { outline: 1px solid var(--gold-bright); outline-offset: 2px; }
       #light-toggle button[aria-pressed="true"] { background: var(--gold); color: #12060e; border-color: var(--gold); }
       :root[data-theme="aurora"] #light-toggle button[aria-pressed="true"] { color: #070b24; }
+      :root[data-theme="aurorablood"] #light-toggle button[aria-pressed="true"] { color: #070b24; }
       :root[data-theme="oxblood"] #light-toggle button[aria-pressed="true"] { color: #181010; }
       /* ---------- backdrop switcher (independent, below light) ---------- */
       #backdrop-toggle {
@@ -172,11 +203,12 @@
       #backdrop-toggle button:focus-visible { outline: 1px solid var(--gold-bright); outline-offset: 2px; }
       #backdrop-toggle button[aria-pressed="true"] { background: var(--gold); color: #12060e; border-color: var(--gold); }
       :root[data-theme="aurora"] #backdrop-toggle button[aria-pressed="true"] { color: #070b24; }
+      :root[data-theme="aurorablood"] #backdrop-toggle button[aria-pressed="true"] { color: #070b24; }
       :root[data-theme="oxblood"] #backdrop-toggle button[aria-pressed="true"] { color: #181010; }
       @media (max-width: 560px) {
-        #theme-toggle { top: 0.6rem; right: 0.6rem; }
+        #theme-toggle { top: 0.6rem; right: 0.6rem; flex-wrap: nowrap; gap: 0.15rem; padding: 0.25rem; }
         #theme-toggle .tt-label { display: none; }
-        #theme-toggle button { padding: 0.45rem 0.5rem; font-size: 0.6rem; letter-spacing: 0.1em; }
+        #theme-toggle button { padding: 0.45rem 0.36rem; font-size: 0.56rem; letter-spacing: 0.07em; }
         #light-toggle { top: calc(0.6rem + 2.55rem); right: 0.6rem; }
         #light-toggle .tt-label { display: none; }
         #light-toggle button { padding: 0.45rem 0.5rem; font-size: 0.6rem; letter-spacing: 0.1em; }
@@ -472,6 +504,7 @@
       <button id="theme-mafia" type="button" aria-pressed="true">MAFIA</button>
       <button id="theme-oxblood" type="button" aria-pressed="false">MAFIA Oxblood</button>
       <button id="theme-aurora" type="button" aria-pressed="false">Aurora Blue</button>
+      <button id="theme-aurorablood" type="button" aria-pressed="false">Aurora Blood</button>
     </div>
     <div id="light-toggle" role="group" aria-label="Stage light">
       <span class="tt-label">Light</span>
@@ -649,26 +682,32 @@
 
         var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        /* ====================== theme: MAFIA / MAFIA Oxblood / Aurora Blue ====================== */
-        /* Three states, MAFIA the unchanged default. Only the environment
+        /* ====================== theme: MAFIA / MAFIA Oxblood / Aurora Blue / Aurora Blood ====================== */
+        /* Four states, MAFIA the unchanged default. Only the environment
            changes: page palette (via data-theme), scene bg/fog, stage lights,
-           and the reflection environment the polished steel picks up. */
+           and the reflection environment the polished steel picks up.
+           Aurora Blood is Aurora Blue in the scene (auTarget = 1, exactly
+           like Aurora Blue: same bg/fog/floor blend and env map); its
+           blood-red accent layer is pure CSS via data-theme="aurorablood". */
         var auTarget = 0, auCur = 0, oxTarget = 0, oxCur = 0;
         var mafiaBtn = document.getElementById("theme-mafia");
         var oxbloodBtn = document.getElementById("theme-oxblood");
         var auroraBtn = document.getElementById("theme-aurora");
+        var auroraBloodBtn = document.getElementById("theme-aurorablood");
         function setTheme(name) {
           document.documentElement.setAttribute("data-theme", name);
-          auTarget = name === "aurora" ? 1 : 0;
+          auTarget = (name === "aurora" || name === "aurorablood") ? 1 : 0;
           oxTarget = name === "oxblood" ? 1 : 0;
           if (reduced) { auCur = auTarget; oxCur = oxTarget; }
           if (mafiaBtn) mafiaBtn.setAttribute("aria-pressed", name === "mafia" ? "true" : "false");
           if (oxbloodBtn) oxbloodBtn.setAttribute("aria-pressed", name === "oxblood" ? "true" : "false");
           if (auroraBtn) auroraBtn.setAttribute("aria-pressed", name === "aurora" ? "true" : "false");
+          if (auroraBloodBtn) auroraBloodBtn.setAttribute("aria-pressed", name === "aurorablood" ? "true" : "false");
         }
         if (mafiaBtn) mafiaBtn.addEventListener("click", function () { setTheme("mafia"); });
         if (oxbloodBtn) oxbloodBtn.addEventListener("click", function () { setTheme("oxblood"); });
         if (auroraBtn) auroraBtn.addEventListener("click", function () { setTheme("aurora"); });
+        if (auroraBloodBtn) auroraBloodBtn.addEventListener("click", function () { setTheme("aurorablood"); });
 
         /* ====================== light: Golden / Moonlight / Gallery / Champagne ====================== */
         /* Independent of theme. Golden = weight 0 (exactly the per-theme
