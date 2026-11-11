@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="aurorablood">
+<html lang="en" data-theme="aurora">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -58,22 +58,6 @@
         --plate-line: rgba(225, 188, 101, 0.48);
         --btn-bg: rgba(16, 23, 54, 0.94);
       }
-      /* Aurora Blood: Aurora Blue exactly (same grounds, panels, slate
-         text, gold wordmark/plaque/buttons) — only the accent layer
-         switches to the MAFIA Oxblood blood red, applied below. */
-      :root[data-theme="aurorablood"] {
-        --plum-950: #070b24;
-        --plum-900: #101736;
-        --plum-800: #1b2450;
-        --gold: #e1bc65;
-        --gold-bright: #e1bc65;
-        --gold-dim: #b9974f;
-        --paper: #ebeefa;
-        --paper-dim: #aab6d9;
-        --plate: rgba(16, 23, 54, 0.89);
-        --plate-line: rgba(225, 188, 101, 0.48);
-        --btn-bg: rgba(16, 23, 54, 0.94);
-      }
       /* MAFIA Oxblood: warm brown ground, oxblood panels, antique Arabian
          Nights gold (burnished, bronze-leaning, muted). No cream surfaces. */
       :root[data-theme="oxblood"] {
@@ -96,17 +80,6 @@
       :root[data-theme="oxblood"] .hero .acts-line span { color: #c2452f; }
       :root[data-theme="oxblood"] .inflate-meter .m-head { color: #c2452f; }
       :root[data-theme="oxblood"] .inflate-meter .m-fill { background: linear-gradient(90deg, #6e1d12, #c2452f); }
-      /* Aurora Blood grammar: the exact Oxblood blood red, in the exact
-         Oxblood positions only — act kickers, acts-line indices, thin
-         rules and the inflation meter as the one filled accent. Headlines
-         and body stay slate; wordmark, plaque and buttons stay gold. */
-      :root[data-theme="aurorablood"] .act-no { color: #c2452f; }
-      :root[data-theme="aurorablood"] .rule { background: #93301f; }
-      :root[data-theme="aurorablood"] .hero .acts-line span { color: #c2452f; }
-      :root[data-theme="aurorablood"] .inflate-meter .m-head { color: #c2452f; }
-      :root[data-theme="aurorablood"] .inflate-meter .m-fill { background: linear-gradient(90deg, #6e1d12, #c2452f); }
-      /* The invite section always renders Aurora Blue — never reddened. */
-      :root[data-theme="aurorablood"] #invite .invite-card .act-no { color: var(--aurora-gold); }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       html, body { margin: 0; padding: 0; }
@@ -131,7 +104,6 @@
           radial-gradient(ellipse 38% 28% at 92% 18%, rgba(125,211,252,0.16), rgba(125,211,252,0) 70%);
       }
       :root[data-theme="aurora"] #aurora-glow { opacity: 1; }
-      :root[data-theme="aurorablood"] #aurora-glow { opacity: 1; }
       ::selection { background: var(--gold); color: var(--plum-950); }
 
       /* ---------- 3D stage ---------- */
@@ -574,14 +546,11 @@
 
         var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-        /* ====================== theme: MAFIA / MAFIA Oxblood / Aurora Blue / Aurora Blood ====================== */
-        /* Four states, MAFIA the unchanged default. Only the environment
-           changes: page palette (via data-theme), scene bg/fog, stage lights,
-           and the reflection environment the polished steel picks up.
-           Aurora Blood is Aurora Blue in the scene (auTarget = 1, exactly
-           like Aurora Blue: same bg/fog/floor blend and env map); its
-           blood-red accent layer is pure CSS via data-theme="aurorablood". */
-        /* Locked scheme: Aurora Blood, permanently. auCur starts at its
+        /* ====================== theme: Aurora Blue (locked) ====================== */
+        /* Locked scheme: plain Aurora Blue, permanently. Page palette via
+           data-theme="aurora"; scene blend auTarget = 1 so the 3D ground,
+           fog, floor blend and glow are Aurora from the first frame. */
+        /* Locked scheme: Aurora Blue. auCur starts at its
            target so the first frame is already Aurora (no cross-fade). */
         var auTarget = 1, auCur = 1, oxTarget = 0, oxCur = 0;
 
