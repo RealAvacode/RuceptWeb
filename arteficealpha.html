@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="mafia">
+<html lang="en" data-theme="aurorablood">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -96,7 +96,6 @@
       :root[data-theme="oxblood"] .hero .acts-line span { color: #c2452f; }
       :root[data-theme="oxblood"] .inflate-meter .m-head { color: #c2452f; }
       :root[data-theme="oxblood"] .inflate-meter .m-fill { background: linear-gradient(90deg, #6e1d12, #c2452f); }
-      :root[data-theme="oxblood"] #theme-toggle button[aria-pressed="true"] { color: #181010; }
       /* Aurora Blood grammar: the exact Oxblood blood red, in the exact
          Oxblood positions only — act kickers, acts-line indices, thin
          rules and the inflation meter as the one filled accent. Headlines
@@ -106,7 +105,6 @@
       :root[data-theme="aurorablood"] .hero .acts-line span { color: #c2452f; }
       :root[data-theme="aurorablood"] .inflate-meter .m-head { color: #c2452f; }
       :root[data-theme="aurorablood"] .inflate-meter .m-fill { background: linear-gradient(90deg, #6e1d12, #c2452f); }
-      :root[data-theme="aurorablood"] #theme-toggle button[aria-pressed="true"] { color: #070b24; }
       /* The invite section always renders Aurora Blue — never reddened. */
       :root[data-theme="aurorablood"] #invite .invite-card .act-no { color: var(--aurora-gold); }
       * { box-sizing: border-box; }
@@ -134,89 +132,6 @@
       }
       :root[data-theme="aurora"] #aurora-glow { opacity: 1; }
       :root[data-theme="aurorablood"] #aurora-glow { opacity: 1; }
-      /* ---------- theme toggle (persistent, by the wordmark) ---------- */
-      #theme-toggle {
-        position: fixed; top: max(0.9rem, env(safe-area-inset-top)); right: 0.9rem;
-        z-index: 26; display: flex; align-items: center; gap: 0.25rem;
-        flex-wrap: wrap; justify-content: flex-end; max-width: calc(100vw - 1.2rem);
-        padding: 0.3rem; background: var(--btn-bg); border: 1px solid var(--plate-line);
-        transition: background-color 0.9s ease, border-color 0.9s ease;
-      }
-      #theme-toggle .tt-label {
-        font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
-        color: var(--paper-dim); padding: 0 0.45rem 0 0.6rem; white-space: nowrap;
-      }
-      #theme-toggle button {
-        appearance: none; border: 1px solid transparent; background: transparent;
-        color: var(--paper-dim); font-family: "Jost", sans-serif; font-weight: 500;
-        font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
-        padding: 0.5rem 0.7rem; cursor: pointer; white-space: nowrap;
-      }
-      #theme-toggle button:hover { color: var(--gold-bright); }
-      #theme-toggle button:focus-visible { outline: 1px solid var(--gold-bright); outline-offset: 2px; }
-      #theme-toggle button[aria-pressed="true"] { background: var(--gold); color: #12060e; border-color: var(--gold); }
-      :root[data-theme="aurora"] #theme-toggle button[aria-pressed="true"] { color: #070b24; }
-      :root[data-theme="aurorablood"] #theme-toggle button[aria-pressed="true"] { color: #070b24; }
-      /* ---------- light switcher (independent of theme, top-right cluster) ---------- */
-      #light-toggle {
-        position: fixed; top: calc(max(0.9rem, env(safe-area-inset-top)) + 3.35rem); right: 0.9rem;
-        z-index: 26; display: flex; align-items: center; gap: 0.25rem;
-        flex-wrap: wrap; justify-content: flex-end; max-width: calc(100vw - 1.2rem);
-        padding: 0.3rem; background: var(--btn-bg); border: 1px solid var(--plate-line);
-        transition: background-color 0.9s ease, border-color 0.9s ease;
-      }
-      #light-toggle .tt-label {
-        font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
-        color: var(--paper-dim); padding: 0 0.45rem 0 0.6rem; white-space: nowrap;
-      }
-      #light-toggle button {
-        appearance: none; border: 1px solid transparent; background: transparent;
-        color: var(--paper-dim); font-family: "Jost", sans-serif; font-weight: 500;
-        font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
-        padding: 0.5rem 0.7rem; cursor: pointer; white-space: nowrap;
-      }
-      #light-toggle button:hover { color: var(--gold-bright); }
-      #light-toggle button:focus-visible { outline: 1px solid var(--gold-bright); outline-offset: 2px; }
-      #light-toggle button[aria-pressed="true"] { background: var(--gold); color: #12060e; border-color: var(--gold); }
-      :root[data-theme="aurora"] #light-toggle button[aria-pressed="true"] { color: #070b24; }
-      :root[data-theme="aurorablood"] #light-toggle button[aria-pressed="true"] { color: #070b24; }
-      :root[data-theme="oxblood"] #light-toggle button[aria-pressed="true"] { color: #181010; }
-      /* ---------- backdrop switcher (independent, below light) ---------- */
-      #backdrop-toggle {
-        position: fixed; top: calc(max(0.9rem, env(safe-area-inset-top)) + 6.7rem); right: 0.9rem;
-        z-index: 26; display: flex; align-items: center; gap: 0.25rem;
-        flex-wrap: wrap; justify-content: flex-end; max-width: calc(100vw - 1.2rem);
-        padding: 0.3rem; background: var(--btn-bg); border: 1px solid var(--plate-line);
-        transition: background-color 0.9s ease, border-color 0.9s ease;
-      }
-      #backdrop-toggle .tt-label {
-        font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;
-        color: var(--paper-dim); padding: 0 0.45rem 0 0.6rem; white-space: nowrap;
-      }
-      #backdrop-toggle button {
-        appearance: none; border: 1px solid transparent; background: transparent;
-        color: var(--paper-dim); font-family: "Jost", sans-serif; font-weight: 500;
-        font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
-        padding: 0.5rem 0.7rem; cursor: pointer; white-space: nowrap;
-      }
-      #backdrop-toggle button:hover { color: var(--gold-bright); }
-      #backdrop-toggle button:focus-visible { outline: 1px solid var(--gold-bright); outline-offset: 2px; }
-      #backdrop-toggle button[aria-pressed="true"] { background: var(--gold); color: #12060e; border-color: var(--gold); }
-      :root[data-theme="aurora"] #backdrop-toggle button[aria-pressed="true"] { color: #070b24; }
-      :root[data-theme="aurorablood"] #backdrop-toggle button[aria-pressed="true"] { color: #070b24; }
-      :root[data-theme="oxblood"] #backdrop-toggle button[aria-pressed="true"] { color: #181010; }
-      @media (max-width: 560px) {
-        #theme-toggle { top: 0.6rem; right: 0.6rem; flex-wrap: nowrap; gap: 0.15rem; padding: 0.25rem; }
-        #theme-toggle .tt-label { display: none; }
-        #theme-toggle button { padding: 0.45rem 0.36rem; font-size: 0.56rem; letter-spacing: 0.07em; }
-        #light-toggle { top: calc(0.6rem + 2.55rem); right: 0.6rem; }
-        #light-toggle .tt-label { display: none; }
-        #light-toggle button { padding: 0.45rem 0.5rem; font-size: 0.6rem; letter-spacing: 0.1em; }
-        #backdrop-toggle { top: calc(0.6rem + 5.1rem); right: 0.6rem; }
-        #backdrop-toggle .tt-label { display: none; }
-        #backdrop-toggle button { padding: 0.45rem 0.38rem; font-size: 0.58rem; letter-spacing: 0.08em; }
-        .hero { padding-top: 11.5rem !important; }
-      }
       ::selection { background: var(--gold); color: var(--plum-950); }
 
       /* ---------- 3D stage ---------- */
@@ -499,29 +414,6 @@
     <div id="stage-poster" aria-hidden="true"></div>
     <div id="stage" aria-hidden="true"></div>
     <div id="aurora-glow" aria-hidden="true"></div>
-    <div id="theme-toggle" role="group" aria-label="Stage theme">
-      <span class="tt-label">Theme</span>
-      <button id="theme-mafia" type="button" aria-pressed="true">MAFIA</button>
-      <button id="theme-oxblood" type="button" aria-pressed="false">MAFIA Oxblood</button>
-      <button id="theme-aurora" type="button" aria-pressed="false">Aurora Blue</button>
-      <button id="theme-aurorablood" type="button" aria-pressed="false">Aurora Blood</button>
-    </div>
-    <div id="light-toggle" role="group" aria-label="Stage light">
-      <span class="tt-label">Light</span>
-      <button id="light-golden" type="button" aria-pressed="true">Golden</button>
-      <button id="light-moonlight" type="button" aria-pressed="false">Moonlight</button>
-      <button id="light-gallery" type="button" aria-pressed="false">Gallery</button>
-      <button id="light-champagne" type="button" aria-pressed="false">Champagne</button>
-    </div>
-    <div id="backdrop-toggle" role="group" aria-label="Stage backdrop">
-      <span class="tt-label">Backdrop</span>
-      <button id="backdrop-halo" type="button" aria-pressed="true">Halo</button>
-      <button id="backdrop-eclipse" type="button" aria-pressed="false">Eclipse</button>
-      <button id="backdrop-arch" type="button" aria-pressed="false">Arch</button>
-      <button id="backdrop-horizon" type="button" aria-pressed="false">Horizon</button>
-      <button id="backdrop-pillars" type="button" aria-pressed="false">Pillars</button>
-      <button id="backdrop-void" type="button" aria-pressed="false">Void</button>
-    </div>
     <div id="stage-fallback">
       <div class="card">
         <h2>The stage, in still form</h2>
@@ -689,25 +581,9 @@
            Aurora Blood is Aurora Blue in the scene (auTarget = 1, exactly
            like Aurora Blue: same bg/fog/floor blend and env map); its
            blood-red accent layer is pure CSS via data-theme="aurorablood". */
-        var auTarget = 0, auCur = 0, oxTarget = 0, oxCur = 0;
-        var mafiaBtn = document.getElementById("theme-mafia");
-        var oxbloodBtn = document.getElementById("theme-oxblood");
-        var auroraBtn = document.getElementById("theme-aurora");
-        var auroraBloodBtn = document.getElementById("theme-aurorablood");
-        function setTheme(name) {
-          document.documentElement.setAttribute("data-theme", name);
-          auTarget = (name === "aurora" || name === "aurorablood") ? 1 : 0;
-          oxTarget = name === "oxblood" ? 1 : 0;
-          if (reduced) { auCur = auTarget; oxCur = oxTarget; }
-          if (mafiaBtn) mafiaBtn.setAttribute("aria-pressed", name === "mafia" ? "true" : "false");
-          if (oxbloodBtn) oxbloodBtn.setAttribute("aria-pressed", name === "oxblood" ? "true" : "false");
-          if (auroraBtn) auroraBtn.setAttribute("aria-pressed", name === "aurora" ? "true" : "false");
-          if (auroraBloodBtn) auroraBloodBtn.setAttribute("aria-pressed", name === "aurorablood" ? "true" : "false");
-        }
-        if (mafiaBtn) mafiaBtn.addEventListener("click", function () { setTheme("mafia"); });
-        if (oxbloodBtn) oxbloodBtn.addEventListener("click", function () { setTheme("oxblood"); });
-        if (auroraBtn) auroraBtn.addEventListener("click", function () { setTheme("aurora"); });
-        if (auroraBloodBtn) auroraBloodBtn.addEventListener("click", function () { setTheme("aurorablood"); });
+        /* Locked scheme: Aurora Blood, permanently. auCur starts at its
+           target so the first frame is already Aurora (no cross-fade). */
+        var auTarget = 1, auCur = 1, oxTarget = 0, oxCur = 0;
 
         /* ====================== light: Golden / Moonlight / Gallery / Champagne ====================== */
         /* Independent of theme. Golden = weight 0 (exactly the per-theme
@@ -715,50 +591,18 @@
            their temperature character on top of whichever theme is active.
            lightPresetName retains the last non-Golden preset so fading back
            to Golden cross-fades from the right colours. */
-        var lightName = "golden";
+        /* Locked light: Moonlight, permanently, at full weight from load. */
+        var lightName = "moonlight";
         var lightPresetName = "moonlight";
-        var lightWeightTarget = 0;
-        var lightBtns = {
-          golden: document.getElementById("light-golden"),
-          moonlight: document.getElementById("light-moonlight"),
-          gallery: document.getElementById("light-gallery"),
-          champagne: document.getElementById("light-champagne")
-        };
-        function setLight(name) {
-          lightName = name;
-          if (name !== "golden") lightPresetName = name;
-          lightWeightTarget = name === "golden" ? 0 : 1;
-          Object.keys(lightBtns).forEach(function (k) {
-            if (lightBtns[k]) lightBtns[k].setAttribute("aria-pressed", k === name ? "true" : "false");
-          });
-        }
-        Object.keys(lightBtns).forEach(function (k) {
-          if (lightBtns[k]) lightBtns[k].addEventListener("click", function () { setLight(k); });
-        });
+        var lightWeightTarget = 1;
 
         /* ====================== backdrop: Halo / Eclipse / Arch / Horizon / Pillars / Void ====================== */
         /* Independent of theme and light. Default Halo = current backdrop.
            Changes only the background glow/architecture behind the object;
            its colour is derived in the render loop from the blended rim/key
            colour, so it follows the ACTIVE LIGHT temperature automatically. */
-        var backdropName = "halo";
-        var backdropBtns = {
-          halo: document.getElementById("backdrop-halo"),
-          eclipse: document.getElementById("backdrop-eclipse"),
-          arch: document.getElementById("backdrop-arch"),
-          horizon: document.getElementById("backdrop-horizon"),
-          pillars: document.getElementById("backdrop-pillars"),
-          void: document.getElementById("backdrop-void")
-        };
-        function setBackdrop(name) {
-          backdropName = name;
-          Object.keys(backdropBtns).forEach(function (k) {
-            if (backdropBtns[k]) backdropBtns[k].setAttribute("aria-pressed", k === name ? "true" : "false");
-          });
-        }
-        Object.keys(backdropBtns).forEach(function (k) {
-          if (backdropBtns[k]) backdropBtns[k].addEventListener("click", function () { setBackdrop(k); });
-        });
+        /* Locked backdrop: Void, permanently (no backdrop glow). */
+        var backdropName = "void";
 
         /* Invite always cross-fades into Aurora Blue as it scrolls into view */
         var inviteSec = document.getElementById("invite");
@@ -874,12 +718,12 @@
         stageEl.appendChild(renderer.domElement);
 
         var scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x12060e);
+        scene.background = new THREE.Color(0x070b24);
         /* Seamless studio sweep: fog colour is copied from scene.background
            every frame (see loop), so it always matches the active ground;
            distances are tuned so the floor is fully dissolved into that
            colour well before its geometric edge, from every camera key. */
-        scene.fog = new THREE.Fog(0x12060e, 8, 20);
+        scene.fog = new THREE.Fog(0x070b24, 8, 20);
 
         function makeEnvTexture(stops, blobs) {
           var c = document.createElement("canvas"); c.width = 1024; c.height = 512;
@@ -932,7 +776,7 @@
           gallery: { key: new THREE.Color(0xffffff), fill: new THREE.Color(0xf0f0f0), rim: new THREE.Color(0xe8e8e8), hemiSky: new THREE.Color(0xe2e2e2), dust: new THREE.Color(0xececec), steel: new THREE.Color(0xf5f5f5), strip: new THREE.Color(0xf2f2f2), keyMult: 1.0, fillMult: 1.25, rimMult: 0.6, hemiMult: 1.15, exposure: 1.1, env: envGallery },
           champagne: { key: new THREE.Color(0xf7e8c9), fill: new THREE.Color(0xeadfc8), rim: new THREE.Color(0xe8d5b0), hemiSky: new THREE.Color(0xc9b99a), dust: new THREE.Color(0xe6d2a0), steel: new THREE.Color(0xf6f1e8), strip: new THREE.Color(0xf2d492), keyMult: 0.88, fillMult: 0.9, rimMult: 0.85, hemiMult: 0.95, exposure: 1.06, env: envChampagne }
         };
-        var lightWeightCur = 0;
+        var lightWeightCur = 1;
         var lightKeyCur = LIGHT_PRESETS.moonlight.key.clone();
         var lightFillCur = LIGHT_PRESETS.moonlight.fill.clone();
         var lightRimCur = LIGHT_PRESETS.moonlight.rim.clone();
@@ -940,11 +784,11 @@
         var lightDustCur = LIGHT_PRESETS.moonlight.dust.clone();
         var lightSteelCur = LIGHT_PRESETS.moonlight.steel.clone();
         var lightStripCur = LIGHT_PRESETS.moonlight.strip.clone();
-        var lightKeyMultCur = 1, lightFillMultCur = 1, lightRimMultCur = 1, lightExposureCur = 1.12;
-        var lightEnvMode = "theme";
-        scene.environment = envMafia;
+        var lightKeyMultCur = 1.05, lightFillMultCur = 1.1, lightRimMultCur = 0.9, lightExposureCur = 1.14;
+        var lightEnvMode = "moonlight";
+        scene.environment = envMoonlight;
         if ("environmentIntensity" in scene) scene.environmentIntensity = 0.55;
-        var envMode = "mafia";
+        var envMode = "aurora";
 
         var camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 80);
 
@@ -1021,7 +865,7 @@
            from the blended rim colour (theme + active Light temperature). */
         var backdropGroup = new THREE.Group();
         scene.add(backdropGroup);
-        var backdropW = { halo: 1, eclipse: 0, arch: 0, horizon: 0, pillars: 0, void: 0 };
+        var backdropW = { halo: 0, eclipse: 0, arch: 0, horizon: 0, pillars: 0, void: 1 };
         var backdropTintMats = [];
         function radialGlowTex() {
           var c = document.createElement("canvas"); c.width = c.height = 256;
