@@ -237,7 +237,9 @@
       .inflate-meter .m-note { font-size: 0.88rem; margin-top: 0.55rem; }
 
       /* ---------- now on stage: the permanent stage module ---------- */
+      .stage-pair { display: grid; gap: 1.5rem; max-width: 62rem; margin: 0 auto; }
       .stage-module { max-width: 62rem; margin: 0 auto; }
+      .stage-pair .stage-module { width: 100%; }
       .stage-module h2 { font-size: clamp(2rem, 5vw, 3rem); }
       .obj-form {
         color: var(--gold-bright); letter-spacing: 0.18em; text-transform: uppercase;
@@ -482,6 +484,26 @@
       <!-- ================= NOW ON STAGE: permanent stage module ================= -->
       <section id="on-stage">
         <div class="inner">
+          <div class="stage-pair">
+          <div class="plate stage-module plinth-plate">
+            <p class="act-no">Now on stage · Object Nº 0</p>
+            <h2>The Plinth</h2>
+            <p class="obj-form">Mirror steel · Formed in one piece</p>
+            <div class="rule"></div>
+            <div class="module-grid">
+              <div>
+                <p>Mirror steel, formed in one piece. The base under the piece on stage is not furniture: it is a formed object in its own right, its profile swelled gently outward like a cushion of steel, in the same making language as the work it carries.</p>
+                <p>It still reads as a ground, not a rival. The gold ARTEFICE plaque on its face is its maker's mark, the signature of the object itself.</p>
+              </div>
+              <ul class="obj-meta">
+                <li><span class="k">Material</span><span class="v">Stainless steel, mirror polish</span></li>
+                <li><span class="k">Method</span><span class="v">Formed in one piece, inflated profile</span></li>
+                <li><span class="k">Mark</span><span class="v">ARTEFICE plaque, gold</span></li>
+                <li><span class="k">Status</span><span class="v">Permanent, the stage's first object</span></li>
+              </ul>
+            </div>
+            <p class="provenance"><strong>Provenance</strong>The object and its ground, crafted together. The plinth is Object Nº 0: it comes before every piece the stage will ever hold, and it stays when they change.</p>
+          </div>
           <div class="plate stage-module" aria-live="polite">
             <p class="act-no">Now on stage</p>
             <h2>Plopp-Form Stool</h2>
@@ -500,6 +522,7 @@
               </ul>
             </div>
             <p class="provenance"><strong>Provenance</strong>Hero reference form for the Artefice stage, shown to carry the inflated steel fabrication story. It is a study after Oskar Zieta's Plopp and the FiDU process, not an Artefice edition offered for sale. Artefice's own first furniture piece will take this place on the plinth.</p>
+          </div>
           </div>
         </div>
       </section>
@@ -944,17 +967,27 @@
         });
         pillarsGroup.visible = false;
 
-        /* ============================== pedestal ============================== */
+        /* ============================== pedestal: Object Nº 0 ============================== */
+        /* The plinth is a formed object, not a flat disc: a lathe profile in
+           mirror polished steel (M.steel, so Moonlight and the theme blends
+           colour it exactly like the piece on stage) that swells gently
+           outward like a cushion, pinches in at a brass weld seam, and closes
+           in a shallow dome the piece rests on. It never inflates; only the
+           chair does. Total height stays 0.5 so the spinner plane, camera
+           keys and scroll choreography are untouched. */
         var pedestal = new THREE.Group();
-        var pedBody = new THREE.Mesh(new THREE.CylinderGeometry(1.62, 1.78, 0.5, 56), M.plinth);
-        pedBody.position.y = 0.25; pedBody.castShadow = true; pedBody.receiveShadow = true;
+        var pedProfile = [
+          [0.001, 0.0], [0.9, 0.0], [1.3, 0.015], [1.55, 0.05], [1.7, 0.11],
+          [1.77, 0.2], [1.765, 0.3], [1.68, 0.39], [1.56, 0.45], [1.47, 0.485],
+          [1.2, 0.5], [0.7, 0.506], [0.001, 0.51]
+        ].map(function (p) { return new THREE.Vector2(p[0], p[1]); });
+        var pedBody = new THREE.Mesh(new THREE.LatheGeometry(pedProfile, 64), M.steel);
+        pedBody.castShadow = true; pedBody.receiveShadow = true;
         pedestal.add(pedBody);
-        var pedTrim = new THREE.Mesh(new THREE.TorusGeometry(1.62, 0.022, 12, 80), M.brass);
-        pedTrim.rotation.x = Math.PI / 2; pedTrim.position.y = 0.5;
+        /* thin brass seam where the formed profile closes, at the pinch */
+        var pedTrim = new THREE.Mesh(new THREE.TorusGeometry(1.562, 0.014, 10, 90), M.brass);
+        pedTrim.rotation.x = Math.PI / 2; pedTrim.position.y = 0.45;
         pedestal.add(pedTrim);
-        var pedBase = new THREE.Mesh(new THREE.TorusGeometry(1.74, 0.02, 12, 80), M.brassSoft);
-        pedBase.rotation.x = Math.PI / 2; pedBase.position.y = 0.03;
-        pedestal.add(pedBase);
         (function () {
           var c = document.createElement("canvas"); c.width = 1024; c.height = 256;
           var x = c.getContext("2d");
@@ -972,8 +1005,10 @@
           tex.anisotropy = 4;
           plaqueMat = new THREE.MeshStandardMaterial({ map: tex, roughness: 0.34, metalness: 0.85, envMapIntensity: 1.0 });
           var plaque = new THREE.Mesh(new THREE.BoxGeometry(1.05, 0.26, 0.03), plaqueMat);
-          plaque.position.set(0, 0.27, 1.66);
-          plaque.rotation.x = -0.1;
+          /* seated on the swelled face of the formed base (radius ~1.77 at
+             this height), so the plaque reads as the object's maker's mark */
+          plaque.position.set(0, 0.27, 1.772);
+          plaque.rotation.x = -0.08;
           pedestal.add(plaque);
         })();
         /* Soft contact shadow baked under the plinth: grounds the pedestal
