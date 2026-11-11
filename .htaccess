@@ -18,6 +18,7 @@ RewriteRule ^$ arteficealpha.html [L]
   RewriteRule ^terms-of-service/?$ terms-of-service.html [L]
   RewriteRule ^fabbrica/?$ fabbrica.html [L]
   RewriteRule ^invite/?$ /invite.html [L,R=301]
+  RewriteRule ^invite2/?$ /invite2.html [L,R=301]
   # Serve the Ratna demo page on ratna.rucept.com
   RewriteCond %{HTTP_HOST} ^ratna\.rucept\.com$ [NC]
   RewriteRule ^$ ratna.html [L]
