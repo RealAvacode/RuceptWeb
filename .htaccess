@@ -25,6 +25,9 @@ RewriteRule ^$ arteficealpha.html [L]
   # Serve the Artefice landing page on artefice.rucept.com (canonical) and artifice.rucept.com (alias)
   RewriteCond %{HTTP_HOST} ^(artefice|artifice)\.rucept\.com$ [NC]
   RewriteRule ^$ fabbrica.html [L]
+  # Serve the Bautir landing page on bautir.rucept.com
+  RewriteCond %{HTTP_HOST} ^bautir\.rucept\.com$ [NC]
+  RewriteRule ^$ bautir.html [L]
   # php -- BEGIN cPanel-generated handler, do not edit
   # Set the "ea-php81" package as the default "PHP" programming language.
   <IfModule mime_module>
