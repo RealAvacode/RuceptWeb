@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en" data-theme="aurora">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Artefice — Send a friend an invite</title>
+<meta name="description" content="Refer a collaborator to Artefice. Send a friend an invite to join the first season of co-creation shows." />
+<meta property="og:title" content="Artefice — Invite a friend for collaborations" />
+<meta property="og:description" content="This is the referral page. Know a fabricator, streamer, product designer, brand or studio who should be part of Artefice? Send them an invite." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://artefice.rucept.com/refer.html" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Italiana&family=Marcellus&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --gold:#E1BC65;
+    --gold-bright:#F5D995;
+    --paper:#f5f1fa;
+    --paper-dim:#c8bcd8;
+    --plate-line:rgba(225,188,101,.45);
+    --aurora-950:#070b24;
+    --aurora-900:#101736;
+    --aurora-panel:#141b3e;
+    --aurora-text:#ebeefa;
+    --aurora-text-dim:#aab6d9;
+    --aurora-gold:#e1bc65;
+    --serif:"Marcellus",Georgia,serif;
+    --logo:"Italiana",Georgia,serif;
+    --gold-metal:linear-gradient(100deg,#BF953F 0%,#FCF6BA 22%,#B38728 45%,#FBF5B7 68%,#AA771C 100%);
+    --sans:"DM Sans","Helvetica Neue",sans-serif;
+    color-scheme:dark;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--aurora-950);
+    color:var(--aurora-text);
+    font-family:var(--sans);
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:var(--aurora-950)}
+  @keyframes sheen{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+  section#invite{
+    position:relative;isolation:isolate;
+    min-height:100vh;display:flex;align-items:center;
+    padding:6rem 1.25rem;
+  }
+  section#invite::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:
+      radial-gradient(ellipse 55% 60% at 4% 45%, rgba(177,140,255,.28), rgba(177,140,255,0) 68%),
+      radial-gradient(ellipse 55% 60% at 96% 45%, rgba(56,189,248,.26), rgba(56,189,248,0) 68%),
+      linear-gradient(180deg, rgba(7,11,36,0) 0%, rgba(7,11,36,.88) 22%, var(--aurora-950) 55%, var(--aurora-900) 100%);
+  }
+  .inner{width:100%;max-width:76rem;margin:0 auto}
+  .invite-wrap{max-width:34rem;margin:0 auto;width:100%}
+  .invite-card{
+    background:var(--aurora-panel);
+    border:1px solid var(--plate-line);
+    padding:clamp(2rem,5vw,3rem) clamp(1.6rem,4vw,2.8rem);
+    color:var(--aurora-text);
+  }
+  .invite-card .act-no{
+    font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--aurora-gold);margin:0 0 .9rem;font-weight:400;
+  }
+  .invite-card h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(2.4rem,6vw,3.9rem);line-height:1.18;padding-bottom:.1em;
+    background:var(--gold-metal);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 7s ease-in-out infinite;margin:.15rem 0 0;
+  }
+  .rule{width:3.2rem;height:1px;background:var(--gold);margin:1.15rem 0 1.25rem}
+  .invite-card > p{color:var(--aurora-text-dim);line-height:1.65;font-size:1.02rem;margin:0}
+
+  .invite-form{margin-top:1.6rem;display:grid;gap:1rem}
+  .field label{
+    display:block;font-size:.7rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--aurora-gold);
+    margin-bottom:.4rem;font-weight:400;
+  }
+  .field input,.field select{
+    width:100%;background:var(--aurora-950);color:var(--aurora-text);
+    border:1px solid rgba(225,188,101,.35);border-radius:0;
+    font-family:var(--sans);font-size:1rem;font-weight:400;
+    padding:.75rem .85rem;
+  }
+  .field input:focus,.field select:focus{
+    outline:1px solid var(--aurora-gold);outline-offset:1px;border-color:var(--aurora-gold);
+  }
+  .field select{
+    appearance:none;-webkit-appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23E1BC65' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right .85rem center;
+  }
+  .field select option{background:var(--aurora-900);color:var(--aurora-text)}
+  .btn{
+    appearance:none;cursor:pointer;text-decoration:none;
+    font-family:var(--sans);font-size:.78rem;font-weight:500;
+    letter-spacing:.18em;text-transform:uppercase;
+    padding:.85rem 1.4rem;border:1px solid var(--aurora-gold);
+    display:inline-block;justify-self:start;
+    background:var(--gold-metal);color:var(--aurora-950);
+  }
+  .btn:hover{background:var(--gold-bright);border-color:var(--gold-bright)}
+  .btn[disabled]{opacity:.55;cursor:wait}
+  .form-note{display:none;font-size:.92rem;line-height:1.55;color:#e79a8f;margin:0}
+  .form-note.show{display:block}
+
+  .invite-done{
+    display:none;margin-top:1.6rem;border:1px solid var(--plate-line);
+    padding:1.1rem 1.2rem;color:var(--aurora-text);line-height:1.6;
+  }
+  .invite-done strong{color:var(--aurora-gold);font-weight:500}
+
+  footer{
+    text-align:center;padding:3.5rem 1.25rem 4.5rem;
+    background:var(--aurora-950);
+    border-top:1px solid var(--plate-line);
+  }
+  .footer-mark{
+    font-family:var(--logo);font-weight:400;
+    font-size:18px;letter-spacing:.34em;text-indent:.34em;
+    color:#FFFFFF;margin:0;
+  }
+  .f-tag{
+    font-family:var(--serif);font-weight:400;font-style:italic;
+    font-size:15px;letter-spacing:.04em;
+    color:var(--gold-bright);margin:4px 0 0;
+  }
+  .footer-icon{margin-top:10px;line-height:0}
+  .footer-icon svg{width:47px;height:26px}
+  .f-craft{font-family:var(--serif);font-style:italic;color:var(--gold-bright);margin:10px 0 0;font-size:12.5px}
+  @media (max-width:640px){
+    section#invite{padding:4.5rem 1rem}
+  }
+</style>
+</head>
+<body>
+  <main>
+    <section id="invite">
+      <div class="inner">
+        <div class="invite-wrap">
+          <div class="invite-card">
+            <p class="act-no">The Referral</p>
+            <h2>Invite a friend for collaborations</h2>
+            <div class="rule"></div>
+            <p>This is the referral page, separate from the invite page. Artefice opens by invitation, and the first season is built through people who know the makers. If you know a fabricator, streamer, product designer, brand or studio who should be part of it, send them an invite here and it reaches them with your name on it.</p>
+            <form class="invite-form" id="invite-form" novalidate>
+              <div class="field">
+                <label for="f-rname">Your name</label>
+                <input id="f-rname" name="referrer_name" type="text" autocomplete="name" placeholder="Your name" required />
+              </div>
+              <div class="field">
+                <label for="f-remail">Your email</label>
+                <input id="f-remail" name="referrer_email" type="email" autocomplete="email" placeholder="you@studio.com" required />
+              </div>
+              <div class="field">
+                <label for="f-name">Friend's name</label>
+                <input id="f-name" name="name" type="text" placeholder="Their name" required />
+              </div>
+              <div class="field">
+                <label for="f-email">Friend's email</label>
+                <input id="f-email" name="email" type="email" placeholder="them@studio.com" required />
+              </div>
+              <div class="field">
+                <label for="f-role">They come to Artefice as</label>
+                <select id="f-role" name="role">
+                  <option>Fabricator</option>
+                  <option>Streamer</option>
+                  <option>Product designer</option>
+                  <option>Brand or studio</option>
+                  <option>Collector</option>
+                </select>
+              </div>
+              <button class="btn btn-solid" type="submit">Send the invite</button>
+              <p class="form-note" id="form-note" role="alert"></p>
+            </form>
+            <div class="invite-done" id="invite-done" role="status">
+              <strong>Referral noted, <span id="done-name">friend</span>.</strong><br />
+              An invite request for <span id="done-email">your friend</span> is on the first season's list, with your name recorded as the one who sent them.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="footer-mark">ARTEFICE</p>
+    <p class="f-tag">Industrial Craft, made for the world.</p>
+    <div class="footer-icon" aria-hidden="true"><svg viewBox="0 0 48 26" fill="none" stroke="#E1BC65" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M24 22.5 C12.5 17.5 6 12.5 6 7.2 C6 4.2 8.4 2.4 11.2 2.4 C15 2.4 19 5 24 10.2 C29 5 33 2.4 36.8 2.4 C39.6 2.4 42 4.2 42 7.2 C42 12.5 35.5 17.5 24 22.5 Z"/><path d="M12.5 6.2 C14 5.2 15.8 5.2 17.2 6.2"/><path d="M35.5 6.2 C34 5.2 32.2 5.2 30.8 6.2"/><circle cx="24" cy="13" r="2.5"/></svg></div>
+    <p class="f-craft">Craft Together</p>
+  </footer>
+
+<script>
+  function srcTag(){try{var q=new URLSearchParams(location.search);var u=[q.get('utm_source'),q.get('utm_medium'),q.get('utm_campaign')].filter(Boolean).join('/');if(u)return u.slice(0,120);if(document.referrer){return new URL(document.referrer).hostname;}return 'direct';}catch(e){return 'direct';}}
+  var form=document.getElementById('invite-form');
+  var note=document.getElementById('form-note');
+  function showNote(msg){note.textContent=msg;note.classList.add('show');}
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var rname=document.getElementById('f-rname').value.trim();
+    var remail=document.getElementById('f-remail').value.trim();
+    var name=document.getElementById('f-name').value.trim();
+    var email=document.getElementById('f-email').value.trim();
+    var role=document.getElementById('f-role').value;
+    if (!rname || !remail || remail.indexOf('@') < 1 || !name || !email || email.indexOf('@') < 1) {
+      if (!rname) document.getElementById('f-rname').focus();
+      else if (!remail || remail.indexOf('@') < 1) document.getElementById('f-remail').focus();
+      else if (!name) document.getElementById('f-name').focus();
+      else document.getElementById('f-email').focus();
+      return;
+    }
+    var btn=form.querySelector('button[type="submit"]');
+    btn.disabled=true;
+    note.classList.remove('show');
+    fetch('invite2.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: 'name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email) + '&role=' + encodeURIComponent(role) + '&source=' + encodeURIComponent(('referral:' + remail + ':' + rname).slice(0,120))
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.ok) {
+        document.getElementById('done-name').textContent = rname.split(' ')[0];
+        document.getElementById('done-email').textContent = name + ' (' + email + ')';
+        form.style.display = 'none';
+        document.getElementById('invite-done').style.display = 'block';
+      } else {
+        btn.disabled = false;
+        showNote((data && data.error) ? data.error : 'Something went wrong — please try again.');
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      showNote('Something went wrong — please try again.');
+    });
+  });
+</script>
+</body>
+</html>
