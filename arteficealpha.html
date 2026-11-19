@@ -419,6 +419,12 @@
     </div>
     <div id="progress"></div>
     <div id="gl-error" role="alert"></div>
+    <div class="mark-toggle mark-fixed" role="group" aria-label="Switch the house mark">
+      <span class="mark-label">Mark</span>
+      <button type="button" data-mark="mark-opt-6a" class="on">6A</button>
+      <button type="button" data-mark="mark-opt-6b">6B</button>
+      <button type="button" data-mark="mark-opt-6ar">6A revised</button>
+    </div>
 
     <main>
       <!-- ================= HERO ================= -->
@@ -433,6 +439,8 @@
               .mark-toggle button { font-family: 'Jost', sans-serif; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--paper-dim); background: transparent; border: 1px solid rgba(225,188,101,0.35); border-radius: 999px; padding: 0.32rem 0.7rem; cursor: pointer; }
               .mark-toggle button.on { color: #1d1420; background: #E1BC65; border-color: #E1BC65; }
               .mark-toggle button:hover { border-color: #E1BC65; }
+              .mark-fixed { position: fixed; top: 14px; right: 14px; z-index: 60; align-items: center; margin-top: 0; background: rgba(16, 10, 28, 0.78); border: 1px solid rgba(225,188,101,0.35); border-radius: 999px; padding: 0.3rem 0.45rem; backdrop-filter: blur(6px); }
+              .mark-fixed .mark-label { font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--paper-dim); padding: 0 0.25rem 0 0.45rem; }
             </style>
             <div class="mark-try">
               <div class="mark-stage"><svg id="mark-opt-6a" viewBox="0 0 100 100" role="img" aria-label="Mark 6A: the Bubble, sheen to the left"><g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="50" cy="50" r="38"/><path d="M31 33 Q36 24 47 22.5"/><path d="M40 44 H60 L64 51 H36 Z"/><path d="M36 51 L50 66 L64 51"/><path d="M50 44 L50 51"/><path d="M50 51 L50 66"/></g><g fill="#E1BC65"><circle cx="50" cy="83" r="1.6"/></g></svg><svg id="mark-opt-6b" viewBox="0 0 100 100" role="img" aria-label="Mark 6B: the Bombe" hidden><g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M18 56 A32 30 0 0 1 82 56"/><path d="M28 56 A22 21 0 0 1 72 56"/><path d="M18 56 H82"/><path d="M24 56 C24 74 36 84 50 84 C64 84 76 74 76 56"/><path d="M32 56 C32 68 40 76 50 76 C60 76 68 68 68 56"/></g><path d="M76 14 l1.5 3.8 L81.3 19.3 l-3.8 1.5 L76 24.6 l-1.5 -3.8 L70.7 19.3 l3.8 -1.5 Z" fill="#E1BC65"/></svg><svg id="mark-opt-6ar" viewBox="0 0 100 100" role="img" aria-label="Mark 6A revised: the Bubble, sheen centred" hidden><g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="50" cy="50" r="38"/><path d="M37 27 Q50 20.5 63 27"/><path d="M40 44 H60 L64 51 H36 Z"/><path d="M36 51 L50 66 L64 51"/><path d="M50 44 L50 51"/><path d="M50 51 L50 66"/></g><g fill="#E1BC65"><circle cx="50" cy="83" r="1.6"/></g></svg></div>
@@ -596,7 +604,7 @@
     <footer>
       <p class="footer-mark">GRAAL</p>
       <div class="footer-brandrow">
-        <div class="footer-icon" aria-hidden="true"><svg viewBox="0 0 48 26" fill="none" stroke="#E1BC65" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M24 22.5 C12.5 17.5 6 12.5 6 7.2 C6 4.2 8.4 2.4 11.2 2.4 C15 2.4 19 5 24 10.2 C29 5 33 2.4 36.8 2.4 C39.6 2.4 42 4.2 42 7.2 C42 12.5 35.5 17.5 24 22.5 Z"/><path d="M12.5 6.2 C14 5.2 15.8 5.2 17.2 6.2"/><path d="M35.5 6.2 C34 5.2 32.2 5.2 30.8 6.2"/><circle cx="24" cy="13" r="2.5"/></svg></div>
+        <div class="footer-icon" id="footer-mark" aria-hidden="true"><svg viewBox="0 0 48 26" fill="none" stroke="#E1BC65" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M24 22.5 C12.5 17.5 6 12.5 6 7.2 C6 4.2 8.4 2.4 11.2 2.4 C15 2.4 19 5 24 10.2 C29 5 33 2.4 36.8 2.4 C39.6 2.4 42 4.2 42 7.2 C42 12.5 35.5 17.5 24 22.5 Z"/><path d="M12.5 6.2 C14 5.2 15.8 5.2 17.2 6.2"/><path d="M35.5 6.2 C34 5.2 32.2 5.2 30.8 6.2"/><circle cx="24" cy="13" r="2.5"/></svg></div>
         <div class="footer-rule" aria-hidden="true"></div>
         <div class="footer-tag"><span>Industrial Craft,</span><span>made for the world.</span></div>
       </div>
@@ -1421,25 +1429,37 @@
   
     <script>
       (function () {
-        var btns = document.querySelectorAll('.mark-toggle button');
+        var INNERS = {
+          'mark-opt-6a': '<g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="50" cy="50" r="38"/><path d="M31 33 Q36 24 47 22.5"/><path d="M40 44 H60 L64 51 H36 Z"/><path d="M36 51 L50 66 L64 51"/><path d="M50 44 L50 51"/><path d="M50 51 L50 66"/></g><g fill="#E1BC65"><circle cx="50" cy="83" r="1.6"/></g>',
+          'mark-opt-6b': '<g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M18 56 A32 30 0 0 1 82 56"/><path d="M28 56 A22 21 0 0 1 72 56"/><path d="M18 56 H82"/><path d="M24 56 C24 74 36 84 50 84 C64 84 76 74 76 56"/><path d="M32 56 C32 68 40 76 50 76 C60 76 68 68 68 56"/></g><path d="M76 14 l1.5 3.8 L81.3 19.3 l-3.8 1.5 L76 24.6 l-1.5 -3.8 L70.7 19.3 l3.8 -1.5 Z" fill="#E1BC65"/>',
+          'mark-opt-6ar': '<g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="50" cy="50" r="38"/><path d="M37 27 Q50 20.5 63 27"/><path d="M40 44 H60 L64 51 H36 Z"/><path d="M36 51 L50 66 L64 51"/><path d="M50 44 L50 51"/><path d="M50 51 L50 66"/></g><g fill="#E1BC65"><circle cx="50" cy="83" r="1.6"/></g>'
+        };
         function apply(id) {
           ['mark-opt-6a', 'mark-opt-6b', 'mark-opt-6ar'].forEach(function (mid) {
             var el = document.getElementById(mid);
             if (el) el.hidden = (mid !== id);
           });
-          btns.forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-mark') === id); });
+          document.querySelectorAll('.mark-toggle button').forEach(function (b) {
+            b.classList.toggle('on', b.getAttribute('data-mark') === id);
+          });
+          var fm = document.getElementById('footer-mark');
+          if (fm && INNERS[id]) {
+            fm.innerHTML = '<svg viewBox="0 0 100 100" width="46" height="46" aria-hidden="true">' + INNERS[id] + '</svg>';
+          }
         }
-        btns.forEach(function (b) {
+        document.querySelectorAll('.mark-toggle button').forEach(function (b) {
           b.addEventListener('click', function () {
             var id = b.getAttribute('data-mark');
             try { localStorage.setItem('graal-mark-choice', id); } catch (e) {}
             apply(id);
           });
         });
+        var start = 'mark-opt-6a';
         try {
           var saved = localStorage.getItem('graal-mark-choice');
-          if (saved && document.getElementById(saved)) apply(saved);
+          if (saved && INNERS[saved]) start = saved;
         } catch (e) {}
+        apply(start);
       })();
     </script>
 </body>
