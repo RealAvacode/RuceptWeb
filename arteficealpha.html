@@ -425,6 +425,7 @@
       <section class="hero" id="top">
         <div class="hero-grid">
           <div class="hero-copy">
+            <canvas id="mark-hero" width="240" height="240" aria-hidden="true"></canvas>
             <p class="wordmark">GRAAL</p>
             <h1>Industrial crafting.<br /><em>Immersive shows.</em><br />Scarce storied objects.</h1>
             <p class="cover-line">Graal is the stage for scarce, storied objects: immersive co-creation shows, built for streamers, studios, brands and product designers.</p>
@@ -570,6 +571,29 @@
                 Your place on the first season's list is held under <span id="done-email">your email</span>. Graal replies by email as the season is composed.
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+    <style>
+      #mark-hero { width: 118px; height: 118px; display: block; margin: 0 0 0.2rem -8px; }
+      .marks-row { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; margin-top: 2.2rem; }
+      .marks-cell { text-align: center; margin: 0; }
+      .marks-cell canvas { width: 190px; height: 190px; max-width: 62vw; display: block; margin: 0 auto; }
+      .marks-cell figcaption { font-family: 'Cormorant Garamond', Georgia, serif; letter-spacing: 0.3em; font-size: 0.82rem; color: #E1BC65; text-transform: uppercase; margin-top: 0.3rem; }
+    </style>
+      <!-- ================= THE MARKS ================= -->
+      <section id="marks">
+        <div class="inner">
+          <div class="plate">
+            <p class="act-no">The Mark</p>
+            <h2>One jewel, three tempers.</h2>
+            <div class="rule"></div>
+            <p>Blown, domed and cut: the jewel as Graal holds it. A stone suspended in blown glass, a bomb&eacute; dome swelling from its ring, and the plain brilliant, each turning in space.</p>
+          </div>
+          <div class="marks-row">
+            <figure class="marks-cell"><canvas id="mark-bubble" width="260" height="260" aria-label="The Bubble: a cut stone turning inside a sphere of blown glass"></canvas><figcaption>The Bubble</figcaption></figure>
+            <figure class="marks-cell"><canvas id="mark-bombe" width="260" height="260" aria-label="The Bomb&eacute;: a domed cabochon ring"></canvas><figcaption>The Bomb&eacute;</figcaption></figure>
+            <figure class="marks-cell"><canvas id="mark-gem" width="260" height="260" aria-label="The Brilliant: a plain cut stone"></canvas><figcaption>The Brilliant</figcaption></figure>
           </div>
         </div>
       </section>
@@ -1400,5 +1424,132 @@
         }
       })();
     </script>
-  </body>
+      <script>
+(function () {
+  function init() {
+    var GOLD = 0xE1BC65, GOLD_DEEP = 0xC9A959;
+    function goldMat(flat) {
+      return new THREE.MeshPhongMaterial({ color: GOLD_DEEP, specular: 0xfff0c0, shininess: 85, flatShading: !!flat });
+    }
+    function ringPoints(radius, y, seg) {
+      var pts = [];
+      for (var i = 0; i <= seg; i++) {
+        var a = (i / seg) * Math.PI * 2;
+        pts.push(new THREE.Vector3(Math.cos(a) * radius, y, Math.sin(a) * radius));
+      }
+      return pts;
+    }
+    function meridianPoints(radius, rotY, seg) {
+      var pts = [], up = new THREE.Vector3(0, 1, 0);
+      for (var i = 0; i <= seg; i++) {
+        var a = (i / seg) * Math.PI * 2;
+        var v = new THREE.Vector3(Math.cos(a) * radius, Math.sin(a) * radius, 0);
+        v.applyAxisAngle(up, rotY);
+        pts.push(v);
+      }
+      return pts;
+    }
+    function buildBubble(group) {
+      var R = 1.3;
+      var glass = new THREE.Mesh(
+        new THREE.SphereGeometry(R, 48, 32),
+        new THREE.MeshPhongMaterial({ color: 0xcfd4ff, transparent: true, opacity: 0.13, shininess: 160, specular: 0xffffff, side: THREE.DoubleSide, depthWrite: false })
+      );
+      group.add(glass);
+      var lineMat = new THREE.LineBasicMaterial({ color: GOLD, transparent: true, opacity: 0.5 });
+      [-0.78, -0.39, 0, 0.39, 0.78].forEach(function (yy) {
+        group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPoints(Math.sqrt(R * R - yy * yy), yy, 72)), lineMat));
+      });
+      for (var m = 0; m < 6; m++) {
+        group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(meridianPoints(R, m * Math.PI / 6, 72)), lineMat));
+      }
+      var gem = new THREE.Mesh(new THREE.OctahedronGeometry(0.55, 0), goldMat(true));
+      gem.scale.set(1, 1.35, 1);
+      group.add(gem);
+      var pontil = new THREE.Mesh(new THREE.SphereGeometry(0.05, 12, 8), goldMat(false));
+      pontil.position.set(0, -1.16, 0);
+      group.add(pontil);
+      return function (t) { gem.rotation.y = -t * 0.9; gem.rotation.x = Math.sin(t * 0.6) * 0.18; };
+    }
+    function buildBombe(group) {
+      var g = new THREE.Group();
+      g.add(new THREE.Mesh(new THREE.TorusGeometry(0.95, 0.17, 22, 64), goldMat(false)));
+      var plate = new THREE.Mesh(new THREE.CylinderGeometry(0.84, 0.84, 0.09, 48), goldMat(false));
+      plate.position.y = 0.94;
+      g.add(plate);
+      var dome = new THREE.Mesh(new THREE.SphereGeometry(0.8, 48, 24, 0, Math.PI * 2, 0, Math.PI / 2), goldMat(false));
+      dome.scale.set(1, 0.74, 1);
+      dome.position.y = 0.97;
+      g.add(dome);
+      g.rotation.x = 0.42;
+      group.add(g);
+      return null;
+    }
+    function buildGem(group) {
+      var crown = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 1.02, 0.4, 8), goldMat(true));
+      crown.position.y = 0.52;
+      var pav = new THREE.Mesh(new THREE.CylinderGeometry(1.02, 0.03, 1.1, 8), goldMat(true));
+      pav.position.y = -0.23;
+      group.add(crown); group.add(pav);
+      var wireMat = new THREE.MeshBasicMaterial({ color: 0xffe9a8, wireframe: true, transparent: true, opacity: 0.35 });
+      var cw = new THREE.Mesh(crown.geometry, wireMat); cw.position.copy(crown.position); cw.scale.setScalar(1.003);
+      var pw = new THREE.Mesh(pav.geometry, wireMat); pw.position.copy(pav.position); pw.scale.setScalar(1.003);
+      group.add(cw); group.add(pw);
+      group.rotation.x = 0.18;
+      return null;
+    }
+    function makeStage(canvasId, builder) {
+      var canvas = document.getElementById(canvasId);
+      if (!canvas) return null;
+      var size = canvas.width || 260;
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(size, size, false);
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+      camera.position.set(0, 0.4, 4.6);
+      camera.lookAt(0, 0, 0);
+      scene.add(new THREE.AmbientLight(0x8a7a9a, 0.85));
+      var key = new THREE.DirectionalLight(0xfff2d8, 1.15); key.position.set(2.5, 3.5, 4); scene.add(key);
+      var rim = new THREE.PointLight(GOLD, 1.1, 30); rim.position.set(-3.5, -1, -2.5); scene.add(rim);
+      var group = new THREE.Group(); scene.add(group);
+      var spin = builder(group);
+      return { renderer: renderer, scene: scene, camera: camera, group: group, spin: spin, visible: true, canvas: canvas };
+    }
+    var stages = [];
+    [['mark-hero', buildBubble], ['mark-bubble', buildBubble], ['mark-bombe', buildBombe], ['mark-gem', buildGem]].forEach(function (pair) {
+      var st = makeStage(pair[0], pair[1]);
+      if (st) stages.push(st);
+    });
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          stages.forEach(function (st) { if (st.canvas === e.target) st.visible = e.isIntersecting; });
+        });
+      }, { rootMargin: '120px' });
+      stages.forEach(function (st) { io.observe(st.canvas); });
+    }
+    var start = performance.now();
+    function tick(now) {
+      var t = (now - start) / 1000;
+      stages.forEach(function (st) {
+        if (!st.visible) return;
+        st.group.rotation.y += 0.005;
+        if (st.spin) st.spin(t);
+        st.renderer.render(st.scene, st.camera);
+      });
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  if (typeof THREE !== 'undefined') { init(); }
+  else {
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s.onload = init;
+    document.head.appendChild(s);
+  }
+})();
+    </script>
+</body>
 </html>
