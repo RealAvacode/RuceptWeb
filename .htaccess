@@ -9,10 +9,17 @@
   RewriteCond %{HTTP_HOST} ^(www\.)?rucept\.com$ [NC]
   RewriteRule ^(index\.php)?$ https://artefice.rucept.com/ [L,R=301]
   # The /fabbrica path retires on the serving hosts: send it to the artefice front page
+# The 3D stage site is Graal: serve the stage page at graal.rucept.com
+RewriteCond %{HTTP_HOST} ^graal\.rucept\.com$ [NC]
+RewriteRule ^$ arteficealpha.html [L]
+# The old alpha addresses move to Graal
 RewriteCond %{HTTP_HOST} ^alpha\.artefice\.rucept\.com$ [NC]
-RewriteRule ^$ arteficealpha.html [L]
+RewriteRule ^(.*)$ https://graal.rucept.com/$1 [L,R=301]
 RewriteCond %{HTTP_HOST} ^arteficealpha\.rucept\.com$ [NC]
-RewriteRule ^$ arteficealpha.html [L]
+RewriteRule ^(.*)$ https://graal.rucept.com/$1 [L,R=301]
+# gemme.rucept.com is held for a future use; send it to Graal for now
+RewriteCond %{HTTP_HOST} ^gemme\.rucept\.com$ [NC]
+RewriteRule ^(.*)$ https://graal.rucept.com/$1 [L,R=301]
   RewriteCond %{HTTP_HOST} ^(artefice|artifice)\.rucept\.com$ [NC]
   RewriteRule ^fabbrica/?$ https://artefice.rucept.com/ [L,R=301]
   # Clean URLs for legal pages
