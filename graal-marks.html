@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Graal — The Mark, Three Ways</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root { --gold: #E1BC65; --paper: #f2ead8; --paper-dim: #b9ac93; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--paper);
+    font-family: 'Jost', system-ui, sans-serif; font-weight: 300;
+    background: radial-gradient(1200px 800px at 70% 20%, #2a1e4a 0%, #191233 45%, #100b24 100%);
+    display: flex; flex-direction: column; align-items: center;
+    padding: 3.2rem 1.25rem 4rem;
+  }
+  .eyebrow { letter-spacing: 0.42em; font-size: 0.72rem; text-transform: uppercase; color: var(--paper-dim); margin: 0 0 2.2rem; text-align: center; }
+  .mark-toggle { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; justify-content: center; margin-bottom: 2.6rem; }
+  .mark-toggle button {
+    font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--paper-dim); background: transparent; border: 1px solid rgba(225,188,101,0.35);
+    border-radius: 999px; padding: 0.45rem 0.95rem; cursor: pointer;
+  }
+  .mark-toggle button.on { color: #1d1420; background: var(--gold); border-color: var(--gold); }
+  .mark-toggle button:hover { border-color: var(--gold); }
+  .stage { text-align: center; }
+  .stage .mark-slot { width: 290px; height: 290px; max-width: 74vw; max-height: 74vw; margin: 0 auto; }
+  .mark-slot svg { width: 100%; height: 100%; display: block; }
+  .wordmark { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 500; font-size: 2.6rem; letter-spacing: 0.55em; text-indent: 0.55em; color: var(--gold); margin: 1.1rem 0 0.4rem; }
+  .caption { color: var(--paper-dim); font-size: 0.98rem; line-height: 1.6; max-width: 34rem; margin: 0.4rem auto 0; }
+  .caption strong { color: var(--paper); font-weight: 500; }
+  .rule { width: 64px; height: 1px; background: rgba(225,188,101,0.5); margin: 2.8rem auto; }
+  .sizes { display: flex; gap: 2.6rem; align-items: flex-end; justify-content: center; }
+  .sizes figure { margin: 0; text-align: center; }
+  .sizes .mark-slot { margin: 0 auto; }
+  .sizes figcaption { margin-top: 0.55rem; font-size: 0.66rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-dim); }
+  .s48 { width: 48px; height: 48px; } .s32 { width: 32px; height: 32px; } .s16 { width: 16px; height: 16px; }
+  .compare { display: flex; gap: 2.2rem; flex-wrap: wrap; justify-content: center; }
+  .compare figure { margin: 0; text-align: center; cursor: pointer; }
+  .compare .mark-slot { width: 104px; height: 104px; margin: 0 auto; opacity: 0.75; transition: opacity 0.2s; }
+  .compare figure:hover .mark-slot, .compare figure.on .mark-slot { opacity: 1; }
+  .compare figcaption { margin-top: 0.5rem; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--paper-dim); }
+  .compare figure.on figcaption { color: var(--gold); }
+  .foot { margin-top: 3.2rem; font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(185,172,147,0.6); text-align: center; }
+  h2.small { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.7rem; letter-spacing: 0.34em; text-transform: uppercase; color: var(--paper-dim); text-align: center; margin: 0 0 1.4rem; }
+</style>
+</head>
+<body>
+  <p class="eyebrow">Graal · House Mark Studies</p>
+
+  <div class="mark-toggle" role="group" aria-label="Switch the house mark">
+    <button type="button" data-mark="mark-opt-6a" class="on">6A</button>
+    <button type="button" data-mark="mark-opt-6b">6B</button>
+    <button type="button" data-mark="mark-opt-6ar">6A revised</button>
+  </div>
+
+  <div class="stage">
+    <div class="mark-slot" data-slot="stage"></div>
+    <p class="wordmark">GRAAL</p>
+    <p class="caption" id="caption"></p>
+  </div>
+
+  <div class="rule"></div>
+
+  <h2 class="small">At small sizes</h2>
+  <div class="sizes">
+    <figure><div class="mark-slot s48" data-slot="size"></div><figcaption>48 px</figcaption></figure>
+    <figure><div class="mark-slot s32" data-slot="size"></div><figcaption>32 px</figcaption></figure>
+    <figure><div class="mark-slot s16" data-slot="size"></div><figcaption>16 px</figcaption></figure>
+  </div>
+
+  <div class="rule"></div>
+
+  <h2 class="small">All three, side by side</h2>
+  <div class="compare" id="compare"></div>
+
+  <p class="foot">Studies toward the house mark of Graal · graal.rucept.com</p>
+
+<script>
+  var BUBBLE_A = '<g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="50" cy="50" r="38"/><path d="M31 33 Q36 24 47 22.5"/><path d="M40 44 H60 L64 51 H36 Z"/><path d="M36 51 L50 66 L64 51"/><path d="M50 44 L50 51"/><path d="M50 51 L50 66"/></g><g fill="#E1BC65"><circle cx="50" cy="83" r="1.6"/></g>';
+  var BUBBLE_R = '<g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><circle cx="50" cy="50" r="38"/><path d="M37 27 Q50 20.5 63 27"/><path d="M40 44 H60 L64 51 H36 Z"/><path d="M36 51 L50 66 L64 51"/><path d="M50 44 L50 51"/><path d="M50 51 L50 66"/></g><g fill="#E1BC65"><circle cx="50" cy="83" r="1.6"/></g>';
+  var BOMBE = '<g fill="none" stroke="#E1BC65" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M18 56 A32 30 0 0 1 82 56"/><path d="M28 56 A22 21 0 0 1 72 56"/><path d="M18 56 H82"/><path d="M24 56 C24 74 36 84 50 84 C64 84 76 74 76 56"/><path d="M32 56 C32 68 40 76 50 76 C60 76 68 68 68 56"/></g><path d="M76 14 l1.5 3.8 L81.3 19.3 l-3.8 1.5 L76 24.6 l-1.5 -3.8 L70.7 19.3 l3.8 -1.5 Z" fill="#E1BC65"/>';
+  var MARKS = {
+    'mark-opt-6a':  { inner: BUBBLE_A, name: '6A · The Bubble', text: 'A cut stone suspended in blown glass. The sheen sits to the left, toward the light, as first drawn.' },
+    'mark-opt-6b':  { inner: BOMBE,    name: '6B · The Bombé',  text: 'A domed cabochon swelling from its ring, drawn in profile, with the glint star above it.' },
+    'mark-opt-6ar': { inner: BUBBLE_R, name: '6A revised · The Bubble, centred', text: 'The same Bubble with the sheen centred: lit straight on, frontal and heraldic.' }
+  };
+  function svgFor(id) { return '<svg viewBox="0 0 100 100" aria-hidden="true">' + MARKS[id].inner + '</svg>'; }
+
+  var compare = document.getElementById('compare');
+  Object.keys(MARKS).forEach(function (id) {
+    var fig = document.createElement('figure');
+    fig.setAttribute('data-mark', id);
+    fig.innerHTML = '<div class="mark-slot">' + svgFor(id) + '</div><figcaption>' + MARKS[id].name + '</figcaption>';
+    fig.addEventListener('click', function () { apply(id); save(id); });
+    compare.appendChild(fig);
+  });
+
+  function apply(id) {
+    document.querySelectorAll('[data-slot]').forEach(function (slot) { slot.innerHTML = svgFor(id); });
+    document.getElementById('caption').innerHTML = '<strong>' + MARKS[id].name + '.</strong> ' + MARKS[id].text;
+    document.querySelectorAll('.mark-toggle button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-mark') === id); });
+    compare.querySelectorAll('figure').forEach(function (f) { f.classList.toggle('on', f.getAttribute('data-mark') === id); });
+  }
+  function save(id) { try { localStorage.setItem('graal-mark-choice', id); } catch (e) {} }
+  document.querySelectorAll('.mark-toggle button').forEach(function (b) {
+    b.addEventListener('click', function () { var id = b.getAttribute('data-mark'); apply(id); save(id); });
+  });
+  var start = 'mark-opt-6a';
+  try { var saved = localStorage.getItem('graal-mark-choice'); if (saved && MARKS[saved]) start = saved; } catch (e) {}
+  apply(start);
+</script>
+</body>
+</html>
